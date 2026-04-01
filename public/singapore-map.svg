@@ -1,0 +1,36 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="#F4F0E9"/>
+  <g opacity="0.7">
+    <path d="M0 84H640" stroke="#D6D0C8"/>
+    <path d="M0 156H640" stroke="#D6D0C8"/>
+    <path d="M0 228H640" stroke="#D6D0C8"/>
+    <path d="M108 0V360" stroke="#D6D0C8"/>
+    <path d="M216 0V360" stroke="#D6D0C8"/>
+    <path d="M324 0V360" stroke="#D6D0C8"/>
+    <path d="M432 0V360" stroke="#D6D0C8"/>
+    <path d="M540 0V360" stroke="#D6D0C8"/>
+  </g>
+  <path
+    d="M164 191C188 168 208 164 230 168C245 152 273 147 299 155C311 146 331 142 352 145C375 137 401 142 423 158C446 162 468 177 479 197C498 203 511 220 507 235C498 246 482 253 462 256C442 271 415 280 385 281C355 294 315 296 280 287C250 293 219 286 196 270C171 264 152 248 145 226C145 212 152 199 164 191Z"
+    fill="#E8DDD0"
+    stroke="#8A8177"
+    stroke-width="4"
+  />
+  <path
+    d="M475 252C492 246 509 248 522 258C534 267 532 280 515 286C498 292 475 287 464 276C457 266 461 257 475 252Z"
+    fill="#EEE4D8"
+    stroke="#8A8177"
+    stroke-width="3"
+  />
+  <path
+    d="M128 240C143 234 161 236 172 246C181 254 180 267 165 271C151 276 132 271 122 262C116 254 117 245 128 240Z"
+    fill="#EEE4D8"
+    stroke="#8A8177"
+    stroke-width="3"
+  />
+  <circle cx="353" cy="205" r="15" fill="#DE732B"/>
+  <circle cx="353" cy="205" r="6" fill="#FFF7F0"/>
+  <path d="M353 220L353 294" stroke="#DE732B" stroke-width="3" stroke-dasharray="7 7"/>
+  <rect x="281" y="292" width="144" height="36" rx="18" fill="white" fill-opacity="0.88"/>
+  <text x="353" y="315" text-anchor="middle" fill="#776D62" font-family="Arial, Helvetica, sans-serif" font-size="16">Singapore</text>
+</svg>

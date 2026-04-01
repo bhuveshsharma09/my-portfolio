@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-strong: #fafafa;
+  --color-ink: #171614;
+  --color-muted: #77706a;
+  --color-line: rgba(23, 22, 20, 0.08);
+  --color-accent: #de732b;
+  --color-accent-soft: #f6e0d0;
+  --color-success: #2d7a52;
+  --color-success-soft: #edf4ef;
+  --color-highlight: #dfff73;
+  --color-highlight-ink: #465000;
+  --font-sans: "SF Pro Display", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --radius-card: 1.6rem;
+  --shadow-card: 0 12px 30px rgba(23, 22, 20, 0.05);
+  --shadow-window: 0 32px 80px rgba(23, 22, 20, 0.08);
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at center, rgba(23, 22, 20, 0.1) 0.7px, transparent 0.8px),
+    radial-gradient(circle at 15% 10%, rgba(244, 244, 244, 0.55), transparent 25%),
+    radial-gradient(circle at 88% 8%, rgba(248, 248, 248, 0.4), transparent 22%),
+    linear-gradient(180deg, #ffffff 0%, #fcfcfc 55%, #f7f7f7 100%);
+  background-size: 14px 14px, auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  color: var(--color-ink);
+  font-family: var(--font-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(219, 107, 45, 0.18);
+}
+
+@utility container-shell {
+  margin-inline: auto;
+  width: min(1240px, calc(100vw - 2rem));
+}
+
+@utility soft-card {
+  border: 1px solid var(--color-line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 251, 251, 0.96));
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(20px);
+}
+
+@utility highlight-strip {
+  background: var(--color-highlight);
+  color: var(--color-highlight-ink);
+}
+
+@utility browser-shell {
+  overflow: hidden;
+  border: 1px solid rgba(23, 22, 20, 0.06);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-window);
+  backdrop-filter: blur(28px);
+}
+
+@utility browser-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(23, 22, 20, 0.05);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 247, 243, 0.9));
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.05em;
+  }
+
+  p {
+    color: var(--color-muted);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgba(219, 107, 45, 0.65);
+    outline-offset: 4px;
+  }
+}
