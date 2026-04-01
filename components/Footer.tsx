@@ -1,27 +1,47 @@
-import Link from "next/link";
-
-import { siteData } from "@/data/site";
+import Link from "next/link"
+import { siteConfig } from "@/data/site"
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="container-shell py-8">
-      <div className="flex flex-col gap-4 border-t border-[var(--color-line)] pt-6 text-sm text-[var(--color-muted)] md:flex-row md:items-center md:justify-between">
-        <p>{siteData.name} • {siteData.title}</p>
-        <div className="flex flex-wrap gap-4">
-          <Link href="/projects" className="transition hover:text-[var(--color-ink)]">
-            Projects
-          </Link>
-          <Link href="/personal" className="transition hover:text-[var(--color-ink)]">
-            Personal
-          </Link>
-          <Link href="/resume" className="transition hover:text-[var(--color-ink)]">
-            Resume
-          </Link>
-          <a href={`mailto:${siteData.email}`} className="transition hover:text-[var(--color-ink)]">
-            Email
-          </a>
+    <footer className="border-t border-border bg-background">
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Copyright */}
+          <p className="text-sm text-muted-foreground">
+            {currentYear} {siteConfig.name}. Built with Next.js.
+          </p>
+
+          {/* Navigation */}
+          <nav className="flex items-center gap-6">
+            <Link
+              href="/#projects"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
+              href="/#education"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Education
+            </Link>
+            <Link
+              href="/#experience"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Experience
+            </Link>
+            <Link
+              href="/#contact"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Contact
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
-  );
+  )
 }

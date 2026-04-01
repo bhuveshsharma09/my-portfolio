@@ -1,87 +1,110 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { Menu } from "lucide-react";
-
-import { siteData } from "@/data/site";
-
-import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
-
-const navItems = [
-  { href: "/projects", label: "Projects" },
-  { href: "/#about", label: "About" },
-  { href: "/experience", label: "Experience" },
-  { href: "/personal", label: "Personal" },
-  { href: "/#contact", label: "Contact" },
-  { href: "/resume", label: "Resume" }
-];
+import Link from "next/link"
+import { Mail, Menu, X } from "lucide-react"
+import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { siteConfig } from "@/data/site"
 
 export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const homeAnchor = (anchor: string) => (pathname === "/" ? anchor : `/${anchor}`)
+
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[rgba(23,22,20,0.06)] bg-[rgba(255,255,255,0.94)] backdrop-blur-xl">
-      <div className="container-shell py-3">
-        <div className="flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-full border border-[rgba(23,22,20,0.08)] bg-white/72 px-4 py-2 shadow-[0_8px_22px_rgba(23,22,20,0.05)]"
-          >
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-ink)]">{siteData.name}</p>
-              <p className="text-[11px] text-[var(--color-muted)]">{siteData.email}</p>
+    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground text-primary-foreground font-bold text-sm">
+              BK
             </div>
           </Link>
-
-          <nav className="hidden items-center gap-2 rounded-full border border-[rgba(23,22,20,0.08)] bg-white/72 px-2 py-2 shadow-[0_8px_22px_rgba(23,22,20,0.05)] md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-[var(--color-muted)] transition hover:bg-white/70 hover:text-[var(--color-ink)]"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden md:block">
-            <Button variant="outline" asChild>
-              <a href={`mailto:${siteData.email}`}>Book a call</a>
-            </Button>
-          </div>
-
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <button
-                  type="button"
-                  aria-label="Open navigation"
-                  className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] bg-white/78"
-                >
-                  <Menu className="size-5 text-[var(--color-ink)]" />
-                </button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetTitle className="sr-only">Navigation</SheetTitle>
-                <div className="mt-10 flex flex-col gap-4">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="rounded-2xl border border-[var(--color-line)] px-4 py-3 text-base font-medium text-[var(--color-ink)]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <Button asChild className="mt-2">
-                    <a href={`mailto:${siteData.email}`}>Book a call</a>
-                  </Button>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+          <Link
+            href={`mailto:${siteConfig.email}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {siteConfig.email}
+          </Link>
         </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          <Link
+            href={homeAnchor("#projects")}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Projects
+          </Link>
+          <Link
+            href={homeAnchor("#experience")}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Experience
+          </Link>
+          <Link
+            href={homeAnchor("#education")}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Education
+          </Link>
+          <Link
+            href={homeAnchor("#contact")}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <nav className="md:hidden border-t border-border px-6 py-4 bg-background">
+          <div className="flex flex-col gap-4">
+            <Link
+              href={homeAnchor("#projects")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Projects
+            </Link>
+            <Link
+              href={homeAnchor("#experience")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Experience
+            </Link>
+            <Link
+              href={homeAnchor("#education")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Education
+            </Link>
+            <Link
+              href={homeAnchor("#contact")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
+          </div>
+        </nav>
+      )}
     </header>
-  );
+  )
 }

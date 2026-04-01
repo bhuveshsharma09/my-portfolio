@@ -1,15 +1,29 @@
-import { FeaturedProjects } from "@/components/FeaturedProjects";
-import { Hero } from "@/components/Hero";
-import { HomeContactForm } from "@/components/HomeContactForm";
-import { ImpactSection } from "@/components/ImpactSection";
+import { Header } from "@/components/header"
+import { HeroSection } from "@/components/hero-section"
+import { BentoGridSection } from "@/components/bento-grid-section"
+import { ExperienceSection } from "@/components/experience-section"
+import { EducationSection } from "@/components/education-section"
+import { ProjectsSection } from "@/components/projects-section"
+import { SkillsSection } from "@/components/skills-section"
+import { CommunitySection } from "@/components/community-section"
+import { ContactSection } from "@/components/contact-section"
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
   return (
-    <div className="pb-12 pt-2 md:pb-20">
-      <Hero />
-      <ImpactSection />
-      <FeaturedProjects />
-      <HomeContactForm />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <HeroSection />
+        <BentoGridSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <CommunitySection />
+        <ContactSection />
+      </main>
+      <Footer />
     </div>
-  );
+  )
 }
