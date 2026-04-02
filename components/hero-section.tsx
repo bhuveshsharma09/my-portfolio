@@ -60,8 +60,7 @@ export function HeroSection() {
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="rounded-full px-6 border-neutral-200">
-            {/* TODO: place resume PDF at public/resume/Bhuvesh_Kumar_Resume.pdf */}
-            <Link href="/resume/Bhuvesh_Kumar_Resume.pdf" download>
+            <Link href="/projects/resume/Bhuvesh_Kumar_Resume_2026.docx" download>
               Download Resume ↓
             </Link>
           </Button>
