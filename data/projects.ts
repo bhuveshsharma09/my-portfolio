@@ -22,6 +22,7 @@ export interface Project {
   subtitle: string
   description: string
   organization: string
+  cardMeta?: string
   status: "shipped" | "in-progress" | "planned" | "designed"
   period?: string
   featured?: boolean
@@ -52,6 +53,7 @@ export const projects: Project[] = [
     description:
       "Quality-focused software engineering on Oracle's Java Management Service, covering automated validation, release integrity, and production-grade test infrastructure across six major product versions.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2022–2026",
     status: "shipped",
     period: "Oct 2022 – Apr 2026",
     featured: true,
@@ -141,6 +143,7 @@ export const projects: Project[] = [
     description:
       "An enterprise RAG pipeline that transforms source documentation into grounded, auditable test specifications. Every generated test traces back to its source passage through a 4-layer citation chain: Citation -> Evidence Fact -> Requirement -> Testable Assertion -> Test Case. Built for the Oracle JMS SQE team and deployed at enterprise scale on OCI.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2025",
     status: "shipped",
     period: "2024 – 2026",
     featured: true,
@@ -278,6 +281,7 @@ export const projects: Project[] = [
     description:
       "Built a Helidon SE pipeline using OCI Vision and OCI GenAI to detect and redact sensitive data from images before publication.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2024",
     status: "shipped",
     period: "2024 – 2025",
     featured: true,
@@ -356,6 +360,7 @@ export const projects: Project[] = [
     description:
       "A Python MCP server contributing to Oracle's public oracle/mcp repository — enabling LLM agents to query Java Management Service fleets for health diagnostics, runtime compliance, security notices, and inventory. 13 tools. 55 unit tests. 90% coverage. PR open against Oracle's official repo.",
     organization: "Oracle · Open Source",
+    cardMeta: "Oracle · Open Source · 2026",
     status: "in-progress",
     period: "2026 – Ongoing",
     featured: true,
@@ -451,6 +456,7 @@ export const projects: Project[] = [
     description:
       "An OCI Generative AI RAG system that ingests JMS design documents — PRDs, Figma files, API specs, meeting notes — into a knowledge base, enabling authors to generate LiveLabs tutorials and SQE test instructions via a chat interface. Proposed, costed, and PoC-delivered.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2025",
     status: "shipped",
     period: "2025 – 2026",
     featured: true,
@@ -552,6 +558,7 @@ export const projects: Project[] = [
     description:
       "A ReAct-pattern agentic system built on OCI GenAI that autonomously navigates the JMS web UI to perform exploratory testing. The agent reasons, decides, and observes across 39 steps — mapping interactive elements, clicking, navigating, and completing tasks without scripted test paths.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2025",
     status: "shipped",
     period: "2025 – 2026",
     featured: true,
@@ -642,6 +649,7 @@ export const projects: Project[] = [
     description:
       "A workflow-first agentic web portal for the Oracle JMS SQE team — designed before the role ended. Sprint Agent reads Jira, retrieves Confluence context, maps Jenkins coverage, and publishes structured test plans with human approval gates. Built on LangGraph with typed tool layers for Jira, Confluence, Slack, and Jenkins.",
     organization: "Oracle",
+    cardMeta: "Oracle · 2026",
     status: "designed",
     period: "2026",
     featured: true,
@@ -722,6 +730,7 @@ export const projects: Project[] = [
     description:
       "Building an end-to-end explainable AI system for Singapore HDB resale price prediction using XGBoost, SHAP, LIME, React, and FastAPI.",
     organization: "NUS-ISS",
+    cardMeta: "NUS-ISS · 2026",
     status: "in-progress",
     period: "2026 – Ongoing",
     featured: true,
@@ -770,6 +779,7 @@ export const projects: Project[] = [
     description:
       "A Flask + Dash web application where users upload any trained scikit-learn model and dataset and instantly receive an interactive XAI dashboard — SHAP, LIME, permutation importance, ICE plots, surrogate decision trees, and live what-if analysis. No code required.",
     organization: "A*STAR · NUS",
+    cardMeta: "A*STAR · NUS · 2020–2021",
     status: "shipped",
     period: "Sep 2020 – Apr 2021",
     metric: { value: "5+", label: "XAI techniques: SHAP · LIME · ICE · Surrogate Tree · What-if" },

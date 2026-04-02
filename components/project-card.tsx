@@ -15,6 +15,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, variant = "featured" }: ProjectCardProps) {
   const router = useRouter()
   const detailHref = `/projects/${project.id}`
+  const cardMeta = project.cardMeta ?? project.organization
   const statusConfig = {
     shipped: {
       icon: CheckCircle2,
@@ -75,6 +76,7 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0 flex-1">
+            <p className="text-xs text-muted-foreground">{cardMeta}</p>
             <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-orange">
               {project.title}
             </h3>
@@ -124,7 +126,7 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-medium text-muted-foreground bg-neutral-100 px-2 py-0.5 rounded">
-                  {project.organization}
+                  {cardMeta}
                 </span>
                 <span
                   className={cn(
