@@ -1,5 +1,7 @@
 import { Header } from "@/components/Header"
+import { SectionAnchorNav } from "@/components/section-anchor-nav"
 import { HeroSection } from "@/components/hero-section"
+import { CurrentlyActiveStrip } from "@/components/currently-active-strip"
 import { BentoGridSection } from "@/components/bento-grid-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { EducationSection } from "@/components/education-section"
@@ -15,6 +17,8 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroSection />
+        <SectionAnchorNav />
+        <CurrentlyActiveStrip />
         <BentoGridSection />
         <ExperienceSection />
         <EducationSection />

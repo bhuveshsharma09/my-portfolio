@@ -8,8 +8,8 @@ import { Award, BookOpen, GraduationCap, MapPin } from "lucide-react"
 
 export function EducationSection() {
   const [showEarlierEducation, setShowEarlierEducation] = useState(false)
-  const primaryEducation = education.slice(0, 3)
-  const earlierEducation = education.slice(3)
+  const primaryEducation = education.slice(0, 2)
+  const earlierEducation = education.slice(2)
 
   return (
     <section id="education" className="px-6 py-16">
@@ -36,7 +36,7 @@ export function EducationSection() {
           onClick={() => setShowEarlierEducation((current) => !current)}
           className="mt-4 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
-          {showEarlierEducation ? "Hide ↑" : "Show earlier education ↓"}
+          {showEarlierEducation ? "Show less ↑" : "Show earlier education ↓"}
         </button>
 
         <div

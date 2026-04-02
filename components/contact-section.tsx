@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="px-6 py-20">
+    <section id="contact" className="scroll-mt-32 px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <div className={cn(
           "rounded-2xl bg-card p-8 md:p-12 text-center",

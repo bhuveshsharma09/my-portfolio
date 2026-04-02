@@ -27,7 +27,7 @@ export function EducationCard() {
                 {edu.degree}
               </p>
               <p className="text-xs text-muted-foreground">
-                {edu.institution} · {edu.period.split("–")[0].trim()}
+                {edu.institution} · {edu.period}
               </p>
               {edu.status === "In Progress" && (
                 <p className="mt-0.5 text-xs font-medium text-orange">In progress</p>

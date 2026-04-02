@@ -9,13 +9,14 @@ import { Mail } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="px-6 py-12 md:py-16">
+    <section id="hero" className="px-6 py-12 md:py-16">
       <div className="mx-auto max-w-5xl">
         {/* Main Headline with inline avatar */}
         <div className="mb-4">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
             <span className="text-muted-foreground/60">Hi, I&apos;m </span>
-            <span className="inline-flex items-center gap-1.5 align-middle mx-1">
+            <span className="text-foreground">Bhuvesh</span>
+            <span className="inline-flex items-center gap-1.5 align-middle mx-2">
               <Image
                 src={siteConfig.avatar}
                 alt={siteConfig.name}
@@ -24,7 +25,7 @@ export function HeroSection() {
                 className="rounded-full border-2 border-neutral-200 inline-block"
               />
             </span>
-            <span className="text-foreground">{siteConfig.name.split(" ")[0]}!</span>
+            <span className="text-foreground">!</span>
           </h1>
         </div>
 
@@ -56,6 +57,12 @@ export function HeroSection() {
             <Link href="#contact">
               <Mail className="mr-2 h-4 w-4" />
               Get in touch
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg" className="rounded-full px-6 border-neutral-200">
+            {/* TODO: place resume PDF at public/resume/Bhuvesh_Kumar_Resume.pdf */}
+            <Link href="/resume/Bhuvesh_Kumar_Resume.pdf" download>
+              Download Resume ↓
             </Link>
           </Button>
           <Link

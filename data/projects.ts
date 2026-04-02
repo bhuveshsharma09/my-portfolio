@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     id: "jms",
     title: "Java Management Service",
-    subtitle: "Software Engineer · Quality & Test Engineering · Oracle (v6.0–v11)",
+    subtitle: "Platform Engineering · OCI Cloud Service · Oracle (v6.0–v11)",
     description:
       "Quality-focused software engineering on Oracle's Java Management Service, covering automated validation, release integrity, and production-grade test infrastructure across six major product versions.",
     organization: "Oracle",

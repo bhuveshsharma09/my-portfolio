@@ -8,6 +8,9 @@ export interface Experience {
   startDate: string
   endDate: string | "Present"
   description: string
+  linkLabel?: string
+  linkHref?: string
+  descriptionSuffix?: string
   highlights: string[]
   techTags?: string[]
   isCurrent?: boolean
@@ -23,8 +26,11 @@ export const experiences: Experience[] = [
     mode: "On site",
     startDate: "Oct 2022",
     endDate: "Apr 2026",
-    description:
-      "Contributed to every Java Management Service release from JMS 6.0 to 11, building features, designing APIs, authoring comprehensive test suites, and shipping multiple AI-powered internal tools on OCI.",
+    description: "3.5 years on Oracle's ",
+    linkLabel: "Java Management Service",
+    linkHref: "https://www.oracle.com/asean/java/jms/",
+    descriptionSuffix:
+      " (v6.0–v11) — platform quality engineering across 6 releases, and 3 self-initiated AI tools shipped to production on OCI.",
     highlights: [
       "Contributed across every JMS release from v6.0 to v11",
       "Built enterprise AI tools on OCI for test generation and workflow automation",
@@ -104,7 +110,7 @@ export const education: Education[] = [
     degree: "MTech in Artificial Intelligence Systems",
     institution: "NUS-ISS",
     location: "Singapore",
-    period: "Jan 2026 – Dec 2028",
+    period: "Jan 2026 – 2027",
     status: "In Progress",
     description:
       "Full-time, in progress. Coursework is centered on production-oriented AI systems, model understanding, and deployment.",
