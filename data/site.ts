@@ -22,7 +22,7 @@ export const siteConfig = {
   stats: [
     { label: "Years", value: "3.5+" },
     { label: "Process improvement via AI", value: "60%+" },
-    { label: "Enterprise AI tools", value: "2" },
+    { label: "Enterprise AI tools", value: "3" },
   ],
   
   focusAreas: [

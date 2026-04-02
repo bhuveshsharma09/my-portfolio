@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import type { KeyboardEvent, MouseEvent } from "react"
 import { cn } from "@/lib/utils"
-import { ExternalLink, Github, CheckCircle2, Clock, Rocket, ArrowUpRight } from "lucide-react"
+import { ExternalLink, Github, CheckCircle2, Clock, Rocket, ArrowUpRight, PencilRuler } from "lucide-react"
 import type { Project } from "@/data/projects"
 
 interface ProjectCardProps {
@@ -30,6 +30,11 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
       icon: Rocket,
       label: "Planned",
       className: "bg-blue/10 text-blue border-blue/20",
+    },
+    designed: {
+      icon: PencilRuler,
+      label: "Designed · Paused",
+      className: "bg-slate-100 text-slate-600 border-slate-200",
     },
   }
 

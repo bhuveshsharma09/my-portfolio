@@ -2,9 +2,11 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { ReactNode } from "react"
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Clock, Github, LayoutPanelTop, PlayCircle, Rocket } from "lucide-react"
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Clock, Github, PlayCircle, Rocket, PencilRuler } from "lucide-react"
 import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
+import { TraceExplorer } from "@/components/projects/TraceExplorer"
+import { ProjectVisualCard } from "@/components/project-visual-card"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getProjectById, projects } from "@/data/projects"
@@ -30,6 +32,11 @@ const statusConfig = {
     icon: Rocket,
     label: "Planned",
     className: "bg-blue/10 text-blue border-blue/20",
+  },
+  designed: {
+    icon: PencilRuler,
+    label: "Designed · Paused",
+    className: "bg-slate-100 text-slate-600 border-slate-200",
   },
 }
 
@@ -90,6 +97,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const status = statusConfig[project.status]
   const StatusIcon = status.icon
+  const hasDemo = Boolean(project.videoPlaceholder.title || project.videoPlaceholder.description)
+  const hasDiagrams = project.diagrams.length > 0
+  const hasGallery = project.gallery.length > 0
 
   return (
     <div className="min-h-screen bg-background">
@@ -180,7 +190,27 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
+          {project.id === "jms-ai-toolkit" ? (
+            <>
+              <DetailCard eyebrow="Overview" title="Project details">
+                <p className="text-sm leading-6 text-muted-foreground">{project.description}</p>
+                <div className="mt-4 space-y-3">
+                  {project.highlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="rounded-xl border border-neutral-100 bg-neutral-50/80 px-4 py-3 text-sm text-muted-foreground"
+                    >
+                      {highlight}
+                    </div>
+                  ))}
+                </div>
+              </DetailCard>
+
+              <DetailCard eyebrow="Traceability" title="Mini Trace Explorer">
+                <TraceExplorer />
+              </DetailCard>
+            </>
+          ) : project.id === "jms" ? (
             <DetailCard eyebrow="Overview" title="Project details">
               <p className="text-sm leading-6 text-muted-foreground">{project.description}</p>
               <div className="mt-4 space-y-3">
@@ -194,21 +224,51 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 ))}
               </div>
             </DetailCard>
+          ) : hasDemo ? (
+            <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
+              <DetailCard eyebrow="Overview" title="Project details">
+                <p className="text-sm leading-6 text-muted-foreground">{project.description}</p>
+                <div className="mt-4 space-y-3">
+                  {project.highlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="rounded-xl border border-neutral-100 bg-neutral-50/80 px-4 py-3 text-sm text-muted-foreground"
+                    >
+                      {highlight}
+                    </div>
+                  ))}
+                </div>
+              </DetailCard>
 
-            <DetailCard eyebrow="Demo" title={project.videoPlaceholder.title}>
-              <div className="overflow-hidden rounded-2xl border border-dashed border-neutral-200 bg-neutral-50">
-                <div className="flex aspect-video items-center justify-center bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),rgba(244,244,245,0.9))]">
-                  <div className="text-center">
-                    <PlayCircle className="mx-auto h-10 w-10 text-orange" />
-                    <p className="mt-3 text-sm font-medium text-foreground">Working demo placeholder</p>
-                    <p className="mt-1 max-w-xs text-xs leading-5 text-muted-foreground">
-                      {project.videoPlaceholder.description}
-                    </p>
+              <DetailCard eyebrow="Demo" title={project.videoPlaceholder.title}>
+                <div className="overflow-hidden rounded-2xl border border-dashed border-neutral-200 bg-neutral-50">
+                  <div className="flex aspect-video items-center justify-center bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),rgba(244,244,245,0.9))]">
+                    <div className="text-center">
+                      <PlayCircle className="mx-auto h-10 w-10 text-orange" />
+                      <p className="mt-3 text-sm font-medium text-foreground">Working demo placeholder</p>
+                      <p className="mt-1 max-w-xs text-xs leading-5 text-muted-foreground">
+                        {project.videoPlaceholder.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
+              </DetailCard>
+            </div>
+          ) : (
+            <DetailCard eyebrow="Overview" title="Project details">
+              <p className="text-sm leading-6 text-muted-foreground">{project.description}</p>
+              <div className="mt-4 space-y-3">
+                {project.highlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="rounded-xl border border-neutral-100 bg-neutral-50/80 px-4 py-3 text-sm text-muted-foreground"
+                  >
+                    {highlight}
+                  </div>
+                ))}
               </div>
             </DetailCard>
-          </div>
+          )}
 
           <div className="grid gap-6 lg:grid-cols-2">
             <DetailCard eyebrow="Design" title="Design decisions">
@@ -258,41 +318,33 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </DetailCard>
           </div>
 
-          <DetailCard eyebrow="Diagrams" title="Design and architecture diagrams">
-            <div className="grid gap-4 md:grid-cols-3">
-              {project.diagrams.map((diagram) => (
-                <div
-                  key={diagram.title}
-                  className="overflow-hidden rounded-2xl border border-neutral-100 bg-neutral-50"
-                >
-                  <div className="flex aspect-[4/3] items-center justify-center bg-[linear-gradient(135deg,rgba(251,146,60,0.1),rgba(59,130,246,0.08))]">
-                    <LayoutPanelTop className="h-8 w-8 text-orange" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold text-foreground">{diagram.title}</h3>
-                    <p className="mt-2 text-xs leading-5 text-muted-foreground">{diagram.caption}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </DetailCard>
+          {project.id !== "jms" && project.id !== "oci-jms-mcp" && hasDiagrams ? (
+            <DetailCard eyebrow="Diagrams" title="Design and architecture diagrams">
+              <div className="grid gap-4 md:grid-cols-3">
+                {project.diagrams.map((diagram) => (
+                  <ProjectVisualCard
+                    key={diagram.title}
+                    visual={diagram}
+                    aspectClassName="aspect-[4/3]"
+                  />
+                ))}
+              </div>
+            </DetailCard>
+          ) : null}
 
-          <DetailCard eyebrow="Gallery" title="Project images">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.gallery.map((image) => (
-                <div
-                  key={image.title}
-                  className="overflow-hidden rounded-2xl border border-neutral-100 bg-neutral-50"
-                >
-                  <div className="aspect-[4/3] bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(245,245,245,0.95))]" />
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold text-foreground">{image.title}</h3>
-                    <p className="mt-2 text-xs leading-5 text-muted-foreground">{image.caption}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </DetailCard>
+          {project.id !== "jms" && hasGallery ? (
+            <DetailCard eyebrow="Gallery" title="Project images">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {project.gallery.map((image) => (
+                  <ProjectVisualCard
+                    key={image.title}
+                    visual={image}
+                    aspectClassName="aspect-[4/3]"
+                  />
+                ))}
+              </div>
+            </DetailCard>
+          ) : null}
         </div>
       </main>
       <Footer />
