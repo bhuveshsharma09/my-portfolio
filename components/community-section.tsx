@@ -1,20 +1,18 @@
 "use client"
 
 import { communityRoles } from "@/data/experience"
+import { SectionHeading } from "@/components/section-heading"
 import { cn } from "@/lib/utils"
 
 export function CommunitySection() {
   return (
-    <section id="community" className="px-6 py-16">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Community & Leadership
-          </h2>
-          <p className="text-muted-foreground">
-            Beyond the code.
-          </p>
-        </div>
+    <section id="community" className="px-6 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-none">
+        <SectionHeading
+          eyebrow="Community & Leadership"
+          title="Beyond the code."
+          subtitle="Volunteering, society memberships, and community work in Singapore."
+        />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {communityRoles.map((role) => (

@@ -1,62 +1,26 @@
-"use client"
-
-import { useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { certifications, education } from "@/data/experience"
+import { SectionHeading } from "@/components/section-heading"
 import { cn } from "@/lib/utils"
 import { Award, BookOpen, GraduationCap, MapPin } from "lucide-react"
 
 export function EducationSection() {
-  const [showEarlierEducation, setShowEarlierEducation] = useState(false)
-  const primaryEducation = education.slice(0, 2)
-  const earlierEducation = education.slice(2)
-
   return (
-    <section id="education" className="px-6 py-16">
-      <div className="mx-auto max-w-5xl">
-        {/* Section Header */}
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Education
-          </h2>
-          <p className="text-muted-foreground">
-            Academic journey from engineering foundations to AI specialization.
-          </p>
-        </div>
+    <section id="education" className="px-6 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-none">
+        <SectionHeading
+          eyebrow="Education"
+          title="From engineering foundations to AI systems."
+          subtitle="Academic journey from mechatronics and computer science to a full-time MTech in AI Systems."
+        />
 
         <Accordion type="single" collapsible className="space-y-4">
-          {primaryEducation.map((edu, index) => (
+          {education.map((edu, index) => (
             <EducationAccordionItem key={edu.id} edu={edu} index={index} />
           ))}
         </Accordion>
 
-        <button
-          type="button"
-          aria-expanded={showEarlierEducation}
-          onClick={() => setShowEarlierEducation((current) => !current)}
-          className="mt-4 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {showEarlierEducation ? "Show less ↑" : "Show earlier education ↓"}
-        </button>
-
-        <div
-          className={cn(
-            "overflow-hidden transition-all duration-300 ease-out",
-            showEarlierEducation ? "mt-4 max-h-[1200px] opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <Accordion type="single" collapsible className="space-y-4">
-            {earlierEducation.map((edu, index) => (
-              <EducationAccordionItem
-                key={edu.id}
-                edu={edu}
-                index={primaryEducation.length + index}
-              />
-            ))}
-          </Accordion>
-        </div>
-
-        <div className="mt-8">
+        <div className="mt-12">
           <div className="mb-3">
             <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               Certifications

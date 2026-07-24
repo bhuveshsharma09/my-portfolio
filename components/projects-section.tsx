@@ -2,20 +2,22 @@
 
 import { useState } from "react"
 import { ProjectCard } from "@/components/project-card"
+import { SectionHeading } from "@/components/section-heading"
 import { cn } from "@/lib/utils"
 import { projects } from "@/data/projects"
 
 export function ProjectsSection() {
   const [showAllFeaturedProjects, setShowAllFeaturedProjects] = useState(false)
   const featuredOrder = [
+    "bizagento",
     "jms-ai-toolkit",
     "hdb-resale-xai",
-    "oci-jms-mcp",
+    "waystone-time-utilization",
+    "waystone-report-automation",
     "data-redaction",
     "jms",
     "agentic-ui-navigator",
     "jms-livelabs-generator",
-    "agentic-sqe-portal",
   ]
 
   const featuredProjects = projects
@@ -26,23 +28,21 @@ export function ProjectsSection() {
   const otherProjects = projects.filter((p) => !p.featured)
 
   return (
-    <section id="projects" className="scroll-mt-32 px-6 py-16">
-      <div className="mx-auto max-w-5xl">
-        {/* Featured Projects Section */}
+    <section id="projects" className="scroll-mt-32 px-6 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-none">
         <div className="mb-16">
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-              Selected Projects
-            </h2>
-            <p className="text-muted-foreground">
-              Key projects showcasing AI/ML innovation and enterprise software development.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Selected Projects"
+            title="Things I've shipped and what they shipped for."
+          />
 
-          {/* Featured Projects - Row layout (stacked) */}
           <div className="space-y-4">
             {primaryFeaturedProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} variant="featured" />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                variant="featured"
+              />
             ))}
           </div>
 
@@ -65,7 +65,11 @@ export function ProjectsSection() {
               >
                 <div className="space-y-4">
                   {hiddenFeaturedProjects.map((project) => (
-                    <ProjectCard key={project.id} project={project} variant="featured" />
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      variant="featured"
+                    />
                   ))}
                 </div>
               </div>

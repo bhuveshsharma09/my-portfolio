@@ -1,59 +1,23 @@
-"use client"
-
 import Link from "next/link"
-import { useState } from "react"
 import { experiences } from "@/data/experience"
+import { SectionHeading } from "@/components/section-heading"
 import { cn } from "@/lib/utils"
 import { Briefcase, MapPin, TrendingUp } from "lucide-react"
 
 export function ExperienceSection() {
-  const [showAllExperience, setShowAllExperience] = useState(false)
-  const visibleExperienceIds = ["oracle-swe", "better-sg-ai-engineer"]
-  const primaryExperiences = visibleExperienceIds
-    .map((id) => experiences.find((exp) => exp.id === id))
-    .filter((exp): exp is (typeof experiences)[number] => Boolean(exp))
-  const hiddenExperiences = experiences.filter((exp) => !visibleExperienceIds.includes(exp.id))
-
   return (
-    <section id="experience" className="scroll-mt-32 px-6 py-16">
-      <div className="mx-auto max-w-5xl">
-        {/* Section Header */}
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Work Experience
-          </h2>
-          <p className="text-muted-foreground">
-            Building enterprise software and AI-powered solutions.
-          </p>
-        </div>
+    <section id="experience" className="scroll-mt-32 px-6 py-16 md:py-24">
+      <div className="mx-auto w-full max-w-none">
+        <SectionHeading
+          eyebrow="Work Experience"
+          title="Where I've built and what I shipped there."
+          subtitle="Enterprise software and AI-powered systems across Oracle and beyond."
+        />
 
-        {/* Experience Cards - Row layout */}
         <div className="space-y-4">
-          {primaryExperiences.map((exp, index) => (
+          {experiences.map((exp, index) => (
             <ExperienceCard key={exp.id} exp={exp} index={index} />
           ))}
-        </div>
-
-        <button
-          type="button"
-          aria-expanded={showAllExperience}
-          onClick={() => setShowAllExperience((current) => !current)}
-          className="mt-4 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {showAllExperience ? "Show less ↑" : "Show full experience ↓"}
-        </button>
-
-        <div
-          className={cn(
-            "overflow-hidden transition-all duration-300 ease-out",
-            showAllExperience ? "mt-4 max-h-[1400px] opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <div className="space-y-4">
-            {hiddenExperiences.map((exp, index) => (
-              <ExperienceCard key={exp.id} exp={exp} index={primaryExperiences.length + index} />
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -107,7 +71,18 @@ function ExperienceCard({
             )}
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-            <span className="font-medium text-orange">{exp.company}</span>
+            {exp.companyHref ? (
+              <Link
+                href={exp.companyHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-orange transition-colors hover:text-foreground"
+              >
+                {exp.company}
+              </Link>
+            ) : (
+              <span className="font-medium text-orange">{exp.company}</span>
+            )}
             <span className="text-neutral-300">|</span>
             <span className="flex items-center gap-1">
               <MapPin className="h-3 w-3" />

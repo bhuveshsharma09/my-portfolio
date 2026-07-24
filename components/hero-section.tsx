@@ -3,89 +3,97 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { StatusBadge } from "@/components/status-badge"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { siteConfig } from "@/data/site"
-import { Mail } from "lucide-react"
+import { StatusBadge } from "@/components/status-badge"
+import { Linkedin, Mail } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section id="hero" className="px-6 py-12 md:py-16">
-      <div className="mx-auto max-w-5xl">
-        {/* Main Headline with inline avatar */}
-        <div className="mb-4">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
-            <span className="text-muted-foreground/60">Hi, I&apos;m </span>
-            <span className="text-foreground">Bhuvesh</span>
-            <span className="inline-flex items-center gap-1.5 align-middle mx-2">
-              <Image
-                src={siteConfig.avatar}
-                alt={siteConfig.name}
-                width={48}
-                height={48}
-                className="rounded-full border-2 border-neutral-200 inline-block"
-              />
-            </span>
-            <span className="text-foreground">!</span>
-          </h1>
-        </div>
+    <section id="hero" className="px-6 pt-8 pb-4 md:pt-8 md:pb-6">
+      <div className="mx-auto w-full max-w-none">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1fr_260px] md:gap-12 lg:grid-cols-[1fr_300px]">
+          <div>
+            <h1 className="text-h1">
+              Hi, I&apos;m {siteConfig.name.split(" ")[0]}
+            </h1>
 
-        {/* Subtitle */}
-        <div className="mb-4 space-y-1">
-          <div className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-foreground">
-            {siteConfig.title}
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-orange">
-              {siteConfig.company}
-            </span>
-            {siteConfig.openToWork && (
-              <StatusBadge text={siteConfig.badgeText} variant="success" pulse />
-            )}
-          </div>
-        </div>
+            <p className="text-h2 mt-4">
+              An {siteConfig.title} based in {siteConfig.location}.
+            </p>
 
-        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {siteConfig.tagline}
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <Button
-            asChild
-            size="lg"
-            className="rounded-full px-6 bg-foreground text-primary-foreground hover:bg-foreground/90"
-          >
-            <Link href="#contact">
-              <Mail className="mr-2 h-4 w-4" />
-              Get in touch
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="rounded-full px-6 border-neutral-200">
-            <Link href="/projects/resume/Bhuvesh_Kumar_Resume_2026.docx" download>
-              Download Resume ↓
-            </Link>
-          </Button>
-          <Link
-            href={siteConfig.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            &rarr; View my GitHub
-          </Link>
-        </div>
-
-        <div className="mt-8 grid gap-3 sm:grid-cols-3">
-          {siteConfig.stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-2xl border border-neutral-200/80 bg-card px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),0_1px_3px_0_rgba(0,0,0,0.04)]"
-            >
-              <p className="text-2xl font-bold tracking-tight text-foreground">{stat.value}</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                {stat.label}
+            {siteConfig.company.split(" · ").map((line, index) => (
+              <p key={line} className={index === 0 ? "text-h2 mt-3" : "text-h2 mt-1"}>
+                {line}
               </p>
+            ))}
+
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    size="lg"
+                    className="rounded-full bg-orange px-6 text-white hover:bg-orange/90"
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Get in touch
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="rounded-xl">
+                  <DropdownMenuItem asChild>
+                    <a
+                      href={siteConfig.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cursor-pointer"
+                    >
+                      <Linkedin className="mr-2 h-4 w-4" />
+                      Connect on LinkedIn
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <a href={siteConfig.social.email} className="cursor-pointer">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email me
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {siteConfig.social.resume && (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full border-blue/20 bg-blue/10 px-6 text-blue hover:bg-blue/20 hover:text-blue"
+                >
+                  <Link href={siteConfig.social.resume} download>
+                    Download Resume ↓
+                  </Link>
+                </Button>
+              )}
+              {siteConfig.openToWork && (
+                <StatusBadge text={siteConfig.badgeText} variant="success" pulse />
+              )}
             </div>
-          ))}
+          </div>
+
+          <div className="order-first md:order-last">
+            <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-full bg-secondary md:max-w-none">
+              <Image
+                src={siteConfig.aboutPortrait.src}
+                alt={siteConfig.aboutPortrait.alt}
+                fill
+                sizes="(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 20rem"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

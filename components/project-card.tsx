@@ -19,7 +19,7 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
   const statusConfig = {
     shipped: {
       icon: CheckCircle2,
-      label: "Shipped",
+      label: "Deployed",
       className: "bg-green/10 text-green border-green/20",
     },
     "in-progress": {
@@ -76,8 +76,10 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0 flex-1">
-            <p className="text-xs text-muted-foreground">{cardMeta}</p>
-            <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-orange">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              {cardMeta}
+            </p>
+            <h3 className="font-display text-base font-medium text-foreground transition-colors group-hover:text-orange">
               {project.title}
             </h3>
             <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">{project.description}</p>
@@ -104,7 +106,7 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
     )
   }
 
-  // Featured variant - Row layout
+  // Featured variant — title-first layout with metric panel on the right
   return (
     <div
       id={`project-${project.id}`}
@@ -119,41 +121,29 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
       )}
     >
       <div className="flex flex-col gap-4 md:flex-row md:items-start">
-        {/* Left: Main content */}
-        <div className="flex-1 min-w-0">
-          {/* Header row */}
-          <div className="flex items-start gap-3 mb-2">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-medium text-muted-foreground bg-neutral-100 px-2 py-0.5 rounded">
-                  {cardMeta}
-                </span>
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium",
-                    status.className
-                  )}
-                >
-                  <StatusIcon className="h-2.5 w-2.5" />
-                  {status.label}
-                </span>
-              </div>
-              <h3 className="text-lg font-semibold text-foreground group-hover:text-orange transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-sm text-muted-foreground">{project.subtitle}</p>
-            </div>
-
-            {/* Links */}
+        <div className="min-w-0 flex-1">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs font-medium text-muted-foreground">
+              {cardMeta}
+            </span>
+            <span
+              className={cn(
+                "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium",
+                status.className,
+              )}
+            >
+              <StatusIcon className="h-2.5 w-2.5" />
+              {status.label}
+            </span>
             {project.links && (
-              <div className="flex gap-1.5 shrink-0">
+              <div className="ml-auto flex gap-1.5">
                 {project.links.github && (
                   <Link
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={stopPropagation}
-                    className="p-1.5 rounded-lg bg-neutral-100 text-muted-foreground hover:text-foreground hover:bg-neutral-200 transition-colors"
+                    className="rounded-lg bg-neutral-100 p-1.5 text-muted-foreground transition-colors hover:bg-neutral-200 hover:text-foreground"
                   >
                     <Github className="h-4 w-4" />
                   </Link>
@@ -164,7 +154,7 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={stopPropagation}
-                    className="p-1.5 rounded-lg bg-neutral-100 text-muted-foreground hover:text-foreground hover:bg-neutral-200 transition-colors"
+                    className="rounded-lg bg-neutral-100 p-1.5 text-muted-foreground transition-colors hover:bg-neutral-200 hover:text-foreground"
                   >
                     <ExternalLink className="h-4 w-4" />
                   </Link>
@@ -173,34 +163,45 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
             )}
           </div>
 
-          {/* Description */}
-          <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2">
+          <h3 className="text-h3 transition-colors">
+            {project.title}
+          </h3>
+          <p className="mt-1 text-body text-muted-foreground">{project.subtitle}</p>
+
+          <p className="mt-3 line-clamp-2 text-body text-muted-foreground">
             {project.description}
           </p>
 
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.techStack.map((tech) => (
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {project.techStack.slice(0, 10).map((tech) => (
               <span
                 key={tech}
-                className="inline-flex items-center rounded-md bg-blue/8 px-2 py-0.5 text-xs font-medium text-blue"
+                className="inline-flex items-center rounded-md bg-blue/8 px-2.5 py-1 text-xs font-medium text-blue"
               >
                 {tech}
               </span>
             ))}
+            {project.techStack.length > 10 && (
+              <span className="self-center text-[10px] font-medium text-muted-foreground">
+                +{project.techStack.length - 10} more
+              </span>
+            )}
           </div>
 
-          <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-orange">
+          <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground underline-offset-4 group-hover:underline">
             View details
             <ArrowUpRight className="h-4 w-4" />
           </div>
         </div>
 
-        {/* Right: Metric */}
         {project.metric && (
-          <div className="md:w-32 shrink-0 p-3 rounded-xl bg-neutral-50 border border-neutral-100 text-center">
-            <span className="text-xl font-bold text-orange">{project.metric.value}</span>
-            <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{project.metric.label}</p>
+          <div className="shrink-0 rounded-2xl border border-border bg-secondary p-4 text-center md:w-40 md:py-6 lg:w-48">
+            <p className="text-stat" style={{ fontSize: "40px" }}>
+              {project.metric.value}
+            </p>
+            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+              {project.metric.label}
+            </p>
           </div>
         )}
       </div>

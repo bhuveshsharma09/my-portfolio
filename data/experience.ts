@@ -2,6 +2,7 @@ export interface Experience {
   id: string
   role: string
   company: string
+  companyHref?: string
   location: string
   type: "Full time" | "Internship" | "Part time" | "Volunteer"
   mode: "On site" | "Remote" | "Hybrid"
@@ -13,14 +14,60 @@ export interface Experience {
   descriptionSuffix?: string
   highlights: string[]
   techTags?: string[]
+  projectIds?: string[]
   isCurrent?: boolean
 }
 
 export const experiences: Experience[] = [
   {
+    id: "waystone-intern",
+    role: "AI Engineer Intern",
+    company: "Waystone",
+    companyHref: "https://www.waystone.com/",
+    location: "Singapore",
+    type: "Internship",
+    mode: "Hybrid",
+    startDate: "Jun 2026",
+    endDate: "Jul 2026",
+    description:
+      "Built internal automation end-to-end on Microsoft Power Platform, from a consultant time-tracking system to AI-powered compliance reporting, owning requirements, architecture, build, and production handoff.",
+    highlights: [
+      "Built a time utilization tracking system on Power Platform: star-schema SharePoint data model, Power Apps canvas app for consultant time entry, and a Power BI dashboard for billable utilization and fees per client",
+      "Automated quarterly compliance reporting with an AI-powered map-reduce pipeline (Power Automate + GPT-4.1 mini) for email classification, extraction, and Word report generation",
+      "Designed a client compliance interface for document uploads, monitoring plans, and automated client reminder flows",
+      "Delivered a Power Automate workshop for the team and produced branded technical documentation for all systems",
+    ],
+    techTags: ["Power BI", "Power Automate", "Power Apps", "SharePoint", "GPT-4.1 mini"],
+    projectIds: ["waystone-time-utilization", "waystone-report-automation"],
+  },
+  {
+    id: "tosba-ai-intern",
+    role: "AI Engineer Intern",
+    company: "Tosba Technologies",
+    companyHref: "https://tosba.tech/",
+    location: "Singapore",
+    type: "Internship",
+    mode: "Remote",
+    startDate: "May 2026",
+    endDate: "Jun 2026",
+    description: "Built ",
+    linkLabel: "BizAgento",
+    linkHref: "https://www.linkedin.com/company/bizagento/posts/?feedView=all",
+    descriptionSuffix:
+      ", a self-hosted, local-LLM-first workflow automation and AI agent platform for regulated businesses that cannot use cloud tools.",
+    highlights: [
+      "Designed and shipped a fully local RAG pipeline using Ollama embeddings (nomic-embed-text) and sqlite-vec, with async document ingestion and per-document status tracking",
+      "Developed core workflow features: visual canvas nodes (React Flow), dry-run test mode, workflow import/export with automatic secret stripping, and a DB-backed schedule/cron trigger with timezone and missed-run handling",
+      "Built security-first capabilities for regulated buyers: tamper-evident hash-chained audit logging, zero-egress enforcement, and full-instance backup/restore",
+    ],
+    techTags: ["Node.js", "React", "SQLite", "Ollama/vLLM", "Local LLM Inference"],
+    projectIds: ["bizagento"],
+  },
+  {
     id: "oracle-swe",
     role: "Software Engineer",
     company: "Oracle",
+    companyHref: "https://www.oracle.com/",
     location: "Singapore",
     type: "Full time",
     mode: "On site",
@@ -30,17 +77,19 @@ export const experiences: Experience[] = [
     linkLabel: "Java Management Service",
     linkHref: "https://www.oracle.com/asean/java/jms/",
     descriptionSuffix:
-      " (v6.0–v11) — platform quality engineering across 6 releases, and 3 self-initiated AI tools shipped to production on OCI.",
+      " (v6.0–v11), platform quality engineering across 6 releases, and 3 self-initiated AI tools shipped to production on OCI.",
     highlights: [
       "Contributed across every JMS release from v6.0 to v11",
       "Built enterprise AI tools on OCI for test generation and workflow automation",
       "Partnered across globally distributed engineering, product, and QA teams",
     ],
+    projectIds: ["jms", "jms-ai-toolkit", "data-redaction", "jms-livelabs-generator", "agentic-ui-navigator"],
   },
   {
     id: "oracle-intern",
     role: "Software Engineer Intern",
     company: "Oracle",
+    companyHref: "https://www.oracle.com/",
     location: "Singapore",
     type: "Internship",
     mode: "On site",
@@ -55,27 +104,10 @@ export const experiences: Experience[] = [
     ],
   },
   {
-    id: "better-sg-ai-engineer",
-    role: "AI Engineer",
-    company: "better.sg",
-    location: "Singapore",
-    type: "Volunteer",
-    mode: "Hybrid",
-    startDate: "Mar 2026",
-    endDate: "Present",
-    description:
-      "Building AI-powered tools for Singapore nonprofits as a volunteer engineer, applying LLM and automation techniques to real social-sector problems.",
-    highlights: [
-      "Building AI-driven solutions for Singapore-based nonprofits using LLMs, automation, and data pipelines.",
-      "Applying production engineering practices to social sector challenges — design, build, and deploy.",
-      "Collaborating with cross-functional volunteer teams to deliver working software with real impact.",
-    ],
-    techTags: ["Python", "LLMs", "FastAPI", "Automation", "Social Impact"],
-  },
-  {
     id: "exicom",
     role: "Validation Engineer",
     company: "Exicom",
+    companyHref: "https://www.exicom.com/",
     location: "India",
     type: "Full time",
     mode: "On site",
@@ -115,18 +147,19 @@ export const education: Education[] = [
     description:
       "Full-time, in progress. Coursework is centered on production-oriented AI systems, model understanding, and deployment.",
     subjects: [
-      "Computer Vision & Pattern Recognition",
-      "Deep Learning",
-      "Natural Language Processing",
-      "Explainable & Responsible AI",
-      "Intelligent Reasoning Systems",
-      "Knowledge Graphs",
-      "Intelligent Robotic Systems",
-      "Recommender Systems",
+      "Machine Reasoning",
+      "Cognitive Systems",
+      "Reasoning Systems",
+      "Problem Solving using Pattern Recognition",
+      "Intelligent Sensing and Sense Making",
+      "Pattern Recognition and Machine Learning Systems",
+      "Robotic Systems",
+      "Autonomous Robots and Vehicles",
+      "Human-Robot System Engineering",
+      "Explainable and Responsible AI",
+      "AI and Cybersecurity",
       "Architecting Agentic AI Solutions",
-      "AI & Cybersecurity",
-      "MLSecOps / LLMSecOps",
-      "Integrating & Deploying AI Solutions",
+      "Deploying and Operating AI Solutions",
     ],
   },
   {
@@ -141,12 +174,12 @@ export const education: Education[] = [
     description:
       "Built full-stack applications using Java, Spring Boot, C#, .NET, and Android while working in agile team environments across group projects.",
     subjects: [
-      "Java enterprise development",
-      "Spring Boot application design",
-      "C# and .NET application development",
-      "Android application development",
-      "Database-backed full-stack systems",
-      "Agile software delivery",
+      "Digital Solutions Development – Design",
+      "Digital Solutions Development – Web Applications",
+      "Digital Solutions Development – Mobile Applications",
+      "Digital Solutions Development – Machine Learning Applications",
+      "Digital Solutions Development – Agile Software Delivery",
+      "Capstone & Internship",
     ],
   },
   {
@@ -156,6 +189,7 @@ export const education: Education[] = [
     location: "India",
     period: "2021 – 2022",
     status: "Completed",
+    achievement: "1st place, Machine Learning Hackathon (Oct 2021)",
     description:
       "Part-time study focused on machine learning models, data processing, and statistical methods.",
     subjects: [
@@ -307,3 +341,51 @@ export const skills = {
   frameworks: ["FastAPI", "Flask", "Spring Boot", "Helidon SE", "Neo4j", "LangChain", "scikit-learn"],
   infrastructure: ["Oracle Cloud", "AWS", "Docker", "Jenkins", "CI/CD", "Git"],
 }
+
+export interface SkillCategory {
+  title: string
+  tags: string[]
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    title: "Languages",
+    tags: ["Python", "Java", "TypeScript", "SQL", "C#", ".NET", "Shell Scripting", "KQL", "DAX"],
+  },
+  {
+    title: "LLMs & Agentic AI",
+    tags: ["RAG Pipelines", "Agentic AI", "LLM Orchestration", "Prompt Engineering", "LLM-as-Judge", "LLM Evaluation", "Vector Databases", "MCP", "Local LLM Inference (Ollama)", "Human-in-the-Loop AI", "Knowledge Graphs"],
+  },
+  {
+    title: "Machine Learning",
+    tags: ["Supervised Learning", "Unsupervised Learning", "XGBoost", "LightGBM", "Stacking Ensembles", "K-Means Clustering", "Feature Engineering", "Recommender Systems", "Model Evaluation"],
+  },
+  {
+    title: "Explainable AI",
+    tags: ["SHAP", "LIME", "Counterfactuals", "Case-Based Reasoning", "Surrogate Models", "Association Rules"],
+  },
+  {
+    title: "Deep Learning, CV & NLP",
+    tags: ["PyTorch", "TensorFlow", "CNNs", "EfficientNet", "Transfer Learning", "Transformers", "Hugging Face", "Text Classification", "NER"],
+  },
+  {
+    title: "Backend & APIs",
+    tags: ["FastAPI", "Flask", "Node.js", "Fastify", "Spring Boot", "Helidon SE", "REST APIs", "Zod", "JWT Auth"],
+  },
+  {
+    title: "Frontend",
+    tags: ["React", "Next.js", "React Flow", "React Query", "Zustand", "Tailwind CSS", "Vite"],
+  },
+  {
+    title: "Data & Storage",
+    tags: ["SQLite", "Neo4j", "MongoDB", "SharePoint Lists", "sqlite-vec", "OCI Object Storage"],
+  },
+  {
+    title: "Microsoft Power Platform",
+    tags: ["Power Apps", "Power Automate", "Power BI", "Power Query", "AI Builder", "SharePoint"],
+  },
+  {
+    title: "Cloud & DevOps",
+    tags: ["Oracle Cloud (OCI)", "AWS", "Docker", "Jenkins", "CI/CD", "Git", "Grafana", "Canary Deployments", "Playwright", "Test Automation"],
+  },
+]

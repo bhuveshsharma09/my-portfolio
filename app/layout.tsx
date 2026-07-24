@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Fragment_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Header } from '@/components/Header'
+import { Sidebar } from '@/components/Sidebar'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const fragmentMono = Fragment_Mono({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-fragment-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Bhuvesh Kumar | AI/ML Engineer',
-  description: 'Ex-Oracle software engineer now pursuing MTech in AI Systems full-time at NUS-ISS, building toward dedicated AI/ML engineering roles.',
+  title: 'Bhuvesh Kumar | AI Engineer',
+  description: 'Ex-Oracle software engineer now pursuing MTech in AI Systems full-time at NUS-ISS, interning as AI Engineer at Tosba Tech in Singapore.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -34,9 +40,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={fragmentMono.variable}>
       <body className="font-sans antialiased">
-        {children}
+        <div className="min-h-screen bg-background md:grid md:grid-cols-[260px_1fr]">
+          <Sidebar />
+          <div className="min-w-0">
+            <Header />
+            <main>{children}</main>
+          </div>
+        </div>
         <Analytics />
       </body>
     </html>
