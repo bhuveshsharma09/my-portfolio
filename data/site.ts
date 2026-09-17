@@ -71,5 +71,6 @@ export const siteConfig = {
     { src: "/projects/about-me/bhuvesh-4.jpg", alt: "Bhuvesh, personal photo 4" },
     { src: "/projects/about-me/bhuvesh-5.jpg", alt: "Bhuvesh, personal photo 5" },
     { src: "/projects/about-me/bhuvesh-6.png", alt: "Bhuvesh at the Oracle office in Singapore" },
+    { src: "/projects/about-me/bhuvesh-7.jpg", alt: "Bhuvesh, personal photo 7" },
   ],
 }
