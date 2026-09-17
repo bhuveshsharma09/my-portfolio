@@ -14,6 +14,16 @@ export function AboutSection() {
               {paragraph}
             </p>
           ))}
+          <p className="text-body max-w-3xl text-muted-foreground md:text-lg">
+            Outside my professional work, I{" "}
+            <Link
+              href="/experience#community"
+              className="rounded-sm text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors hover:decoration-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              contribute to Singapore’s technology and nonprofit communities
+            </Link>
+            .
+          </p>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-2">

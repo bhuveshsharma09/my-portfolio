@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Quote } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 import {
   Carousel,
@@ -9,12 +9,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { getProjectById } from "@/data/projects"
-
-interface OrgTestimonial {
-  image: string
-  alt: string
-  caption: string
-}
+import { getTestimonialById } from "@/data/testimonials"
+import { InitialsAvatar } from "@/components/initials-avatar"
 
 interface Organization {
   name: string
@@ -25,7 +21,7 @@ interface Organization {
   intro: string
   projectIds?: string[]
   linkedinEmbed?: { url: string; height: number }
-  testimonials?: OrgTestimonial[]
+  testimonialIds?: string[]
 }
 
 const organizations: Organization[] = [
@@ -66,20 +62,7 @@ const organizations: Organization[] = [
     intro:
       "3.5 years on Oracle's Java Management Service (v6.0–v11): platform quality engineering across six releases, plus four self-initiated AI tools built on OCI — a RAG test-spec generator, a sensitive-data redaction system, a LiveLabs tutorial generator, and an agentic UI test navigator.",
     projectIds: ["jms", "jms-ai-toolkit", "data-redaction", "jms-livelabs-generator", "agentic-ui-navigator"],
-    testimonials: [
-      {
-        image: "/projects/jms-test-spec-generator/colleague-testimonial-full.png",
-        alt: "WhatsApp message from a JMS quality engineer about the Test Specification Generator",
-        caption:
-          "A JMS quality engineer on the Test Specification Generator: a 55–60% cut in the most time-consuming part of spec writing.",
-      },
-      {
-        image: "/projects/redact-sensetive-data/colleague-testimonial.png",
-        alt: "Message from a colleague about the sensitive data redaction tool",
-        caption:
-          "A colleague on the redaction tool: roughly 80% less time than manual processing, with better consistency and less human error.",
-      },
-    ],
+    testimonialIds: ["test-spec-generator", "sensitive-data-redaction"],
   },
   {
     name: "Exicom",
@@ -162,28 +145,46 @@ export function OrganizationsSection() {
                     allowFullScreen
                   />
                 ) : null}
-                {org.testimonials?.length ? (
+                {org.testimonialIds?.length ? (
                   <div className="mt-3">
                     <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground md:text-right">
                       What colleagues said
                     </p>
                     <Carousel className="w-full">
                       <CarouselContent>
-                        {org.testimonials.map((t) => (
-                          <CarouselItem key={t.image}>
-                            <figure>
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={t.image}
-                                alt={t.alt}
-                                className="w-full rounded-xl border border-neutral-200"
-                              />
-                              <figcaption className="mt-2 text-xs italic leading-5 text-muted-foreground">
-                                {t.caption}
-                              </figcaption>
-                            </figure>
-                          </CarouselItem>
-                        ))}
+                        {org.testimonialIds
+                          .map((id) => getTestimonialById(id))
+                          .filter((t): t is NonNullable<typeof t> => Boolean(t))
+                          .map((t) => (
+                            <CarouselItem key={t.id}>
+                              <figure className="rounded-xl border border-neutral-200 px-10 py-4">
+                                <div className="flex items-center gap-2.5">
+                                  <InitialsAvatar name={t.name} className="h-8 w-8 text-xs" />
+                                  <div className="min-w-0">
+                                    <Link
+                                      href={t.linkedin}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block truncate text-sm font-semibold text-foreground transition-colors hover:text-orange"
+                                    >
+                                      {t.name}
+                                    </Link>
+                                    <p className="truncate text-xs text-muted-foreground">{t.role}</p>
+                                  </div>
+                                </div>
+                                <Quote className="mt-3 h-4 w-4 text-orange/60" aria-hidden />
+                                <blockquote className="mt-1.5 text-xs italic leading-5 text-muted-foreground">
+                                  &ldquo;{t.quote}&rdquo;
+                                </blockquote>
+                                <figcaption className="mt-3 flex items-center justify-between gap-2">
+                                  <span className="text-[10px] text-muted-foreground">via {t.source}</span>
+                                  <span className="shrink-0 whitespace-nowrap rounded-full bg-orange/10 px-2.5 py-1 text-xs font-semibold text-orange">
+                                    {t.metric}
+                                  </span>
+                                </figcaption>
+                              </figure>
+                            </CarouselItem>
+                          ))}
                       </CarouselContent>
                       <CarouselPrevious className="left-2" />
                       <CarouselNext className="right-2" />

@@ -97,8 +97,9 @@ export function RedactionCompare() {
         </span>
       </div>
       <p className="mt-3 text-xs italic text-muted-foreground">
-        Illustrative example with sample data — drag the divider to reveal what the redaction agents mask.
-        In the real tool this comparison is shown per image, with one-click edit of any redaction.
+        Illustrative example using synthetic data. Drag the divider, or use the arrow keys, to reveal what the
+        agents mask. In the application this comparison is shown per image, and the reviewer can approve the
+        result or request another edit with a natural-language instruction.
       </p>
     </div>
   )

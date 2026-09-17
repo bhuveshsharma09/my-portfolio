@@ -28,7 +28,7 @@ export function ContactSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
             <Button asChild size="lg" className="rounded-full px-8 bg-foreground text-primary-foreground hover:bg-foreground/90">
-              <Link href={siteConfig.social.email}>
+              <Link href={siteConfig.social.email} target="_blank" rel="noopener noreferrer">
                 <Mail className="mr-2 h-4 w-4" />
                 Send me an email
               </Link>

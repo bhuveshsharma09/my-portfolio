@@ -1,28 +1,27 @@
 export const siteConfig = {
   name: "Bhuvesh Kumar",
   title: "AI Engineer",
-  company: "MTech in AI @ NUS-ISS · ex-Oracle Software Developer",
+  company: "MTech in AI Systems @ NUS-ISS · Former Oracle Software Engineer",
   email: "bhuveshsharma09@gmail.com",
   phone: "+65-90919488",
   location: "Singapore",
   coordinates: "1.3521° N, 103.8198° E",
-  bio: "Built and shipped production AI tools at Oracle: a RAG pipeline that cut test spec time by 60% and a computer vision system that reduced manual effort by 85%. Now in full-time MTech in AI Systems at NUS-ISS, targeting AI/ML engineering roles where production rigour matters.",
+  bio: "AI engineer with 3.5 years of software engineering experience at Oracle, now building secure, production-ready AI and automation systems for regulated businesses in Singapore. Full-time MTech in AI Systems at NUS-ISS.",
   tagline:
-    "Built and shipped production AI tools at Oracle: a RAG pipeline that cut test spec time by 60% and a computer vision system that reduced manual effort by 85%. Now in full-time MTech in AI Systems at NUS-ISS, targeting AI/ML engineering roles where production rigour matters.",
+    "AI engineer with 3.5 years of software engineering experience at Oracle, now building secure, production-ready AI and automation systems for regulated businesses in Singapore. Full-time MTech in AI Systems at NUS-ISS.",
   avatar: "/avatar.jpg",
   openToWork: true,
-  badgeText: "Open to AI/ML roles",
+  badgeText: "Open to AI/ML roles · Singapore",
 
   // Editorial hero (jasminewilson-inspired structure)
   roleLabel: "AI Engineer · MTech Candidate",
-  headline:
-    "Production AI systems built with the rigour of enterprise engineering.",
+  headline: "AI engineer building secure, production-ready AI and automation systems.",
 
   social: {
     github: "https://github.com/bhuveshsharma09",
     linkedin: "https://sg.linkedin.com/in/bhuvesh-kumar-9732821b1",
     email: "mailto:bhuveshsharma09@gmail.com",
-    resume: "/projects/resume/Bhuvesh_Kumar_Resume_2026.docx",
+    resume: "/projects/resume/Bhuvesh_Kumar_Resume_2026.pdf",
   },
 
   stats: [
@@ -49,8 +48,9 @@ export const siteConfig = {
 
   // About Me section
   aboutMe: [
-    "I started out as an electronics engineer with a background in mechatronics, until programming embedded systems and microcontrollers showed me where my real passion lived: software. That spark sent me from Delhi to Singapore to study Computer Science, then on to 3.5 years as a software developer at Oracle working in Java and Python. Today I'm pursuing an MTech in AI at NUS, exploring how to build machines that reason.",
-    "When I'm not coding, you'll find me traveling and chasing good food, playing with my dog, or sketching with a pencil, my favorite way to unplug.",
+    "I'm an AI engineer with 3.5 years of software engineering experience at Oracle, plus hands-on experience building AI automation for regulated businesses in Singapore. My work spans RAG, agentic workflows, document automation, computer vision, and enterprise platforms, built with Python, Java, OCI, and the Microsoft Power Platform.",
+    "I began in electronics and mechatronics, where programming embedded systems and microcontrollers drew me toward software. That journey took me from Delhi to Singapore to study Computer Science and then to Oracle's Java Management Service team. Across six releases, I contributed to platform engineering and built internal AI tools that reduced time spent on manual workflows by up to 80%. I'm now pursuing an MTech in AI Systems at NUS-ISS, focused on turning complex business processes into secure, dependable AI products.",
+    "Outside work, I travel for good food, sketch with a pencil, and spend time with my dog.",
   ],
 
   keyFacts: [

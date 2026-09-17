@@ -135,9 +135,11 @@ export interface Project {
   organizationHref?: string
   organizationIcon?: string
   cardMeta?: string
-  status: "shipped" | "in-progress" | "planned" | "designed"
+  status: "shipped" | "in-progress" | "planned" | "designed" | "research" | "prototype" | "role" | "internal"
   period?: string
   featured?: boolean
+  maturity?: "Production" | "Internal tool" | "Internal production tool" | "Proof of concept" | "Research" | "Capstone"
+  contribution?: string
   metric?: ProjectMetric
   techStack: string[]
   links?: {
@@ -145,6 +147,7 @@ export interface Project {
     demo?: string
     docs?: string
   }
+  productLink?: { href: string; label: string; ariaLabel: string }
   detailSummary: string
   highlights: string[]
   design: ProjectDetailBlock[]
@@ -177,7 +180,7 @@ export interface Project {
   videos?: { title: string; youtubeId: string }[]
   linkedinEmbed?: string
   linkedinEmbedHeight?: number
-  testimonial?: { image: string; alt?: string; caption?: string }
+  testimonialId?: string
   challenges?: { title: string; challenge: string; solution: string }[]
   howItWorks?: { title?: string; steps: string[]; outro?: string }
   problemFlows?: ProjectFlowSpec[]
@@ -192,7 +195,7 @@ export const projects: Project[] = [
     title: "BizAgento",
     subtitle: "Self-hosted visual workflow automation platform",
     description:
-      "A workflow automation product in the style of n8n, designed and built front to back at Tosba Technologies. Users compose automations on a visual node canvas, triggers, branching, loops, and local LLM agent steps, and run everything on their own server, so no data leaves the machine.",
+      "A workflow automation product in the style of n8n. Working with the founder within an existing codebase, I implemented workflow-building, dry-run and debugging features and local Ollama-powered AI and RAG steps designed to keep workflow data and inference on infrastructure the organization controls.",
     organization: "Tosba Technologies",
     organizationHref: "https://tosba.tech/",
     organizationIcon: "/icons/tosba.jpg",
@@ -200,9 +203,16 @@ export const projects: Project[] = [
     status: "shipped",
     period: "May 2026 – Jun 2026",
     featured: true,
-    metric: { value: "0", label: "data egress, self-hosted with local LLM inference" },
+    maturity: "Production",
+    contribution: "Individual contributor · with the founder",
+    metric: { value: "Local-first", label: "AI and workflow execution designed for customer-controlled infrastructure" },
     linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:share:7358121198624432128?collapsed=1",
     linkedinEmbedHeight: 264,
+    productLink: {
+      href: "https://frontend.bizagento.ai/login",
+      label: "Open BizAgento app ↗",
+      ariaLabel: "Open the BizAgento application",
+    },
     techStack: [
       "React 19",
       "TypeScript",
@@ -371,9 +381,9 @@ export const projects: Project[] = [
     id: "waystone-time-utilization",
     layout: "document",
     title: "Time Utilization Automation",
-    subtitle: "Power Platform workflow with a management dashboard",
+    subtitle: "Power Apps time entry with Power BI management reporting",
     description:
-      "When I joined, every consultant kept their own Excel sheet of billable and non-billable hours, and every week a manager had to trawl through those sheets by hand to work out utilization and charge clients fairly. I learned the process from the people running it, then automated the pipeline end-to-end: a Power Apps canvas app where consultants log their hours in seconds, SharePoint Lists as the database behind it, and a Power BI dashboard where managers get what used to take hours of spreadsheet work.",
+      "A complete Power Platform solution that replaced individually maintained consultant Excel files with structured time entry, governed data, and self-service management reporting: a five-screen Power Apps application, a five-list SharePoint data model, and a Power BI dashboard built with Power Query and DAX, all within the Microsoft 365 licensing the firm already had.",
     organization: "Waystone Compliance Solutions",
     organizationHref: "https://www.waystone.com/",
     organizationIcon: "/icons/waystone.png",
@@ -381,7 +391,9 @@ export const projects: Project[] = [
     status: "shipped",
     period: "Jun 2026 – Jul 2026",
     featured: true,
-    metric: { value: "Hassle-free", label: "time entry for consultants · an insightful, actionable dashboard for managers" },
+    maturity: "Internal tool",
+    contribution: "Designed and built",
+    metric: { value: "Eliminated", label: "manual weekly and quarterly spreadsheet reconciliation" },
     techStack: ["Power Apps", "SharePoint", "Power BI", "Power Query", "DAX"],
     linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:share:7483692160689532928?collapsed=1",
     detailSummary:
@@ -434,13 +446,13 @@ export const projects: Project[] = [
               {
                 title: "History calendar",
                 caption: "Click any day in any month and edit it in place: one row per piece of work, with client, activity, hours, and a description. Nothing saves until submit.",
-                src: "/projects/waystone-time-utilization/history-calendar.png",
+                src: "/projects/waystone-time-utilization/history-calendar-sanitized.png",
                 alt: "History calendar screen with month view and day editing rows",
               },
               {
                 title: "Week editor",
                 caption: "Fill a whole week fast: the day strip mirrors the calendar colors, and header counters show exactly what will change on save.",
-                src: "/projects/waystone-time-utilization/week-editor.jpg",
+                src: "/projects/waystone-time-utilization/week-editor-sanitized.jpg",
                 alt: "Week editor screen with day strip and editable rows",
               },
             ],
@@ -472,7 +484,7 @@ export const projects: Project[] = [
               {
                 title: "Power BI: Client Profitability",
                 caption: "Billable hours and effort value per client, plus the top clients by fee share. Client names blurred.",
-                src: "/projects/waystone-time-utilization/powerbi-client-profitability.png",
+                src: "/projects/waystone-time-utilization/powerbi-client-profitability-sanitized.png",
                 alt: "Power BI Client Profitability report with sensitive data blurred",
               },
               {
@@ -581,6 +593,8 @@ export const projects: Project[] = [
     status: "shipped",
     period: "Jun 2026 – Jul 2026",
     featured: true,
+    maturity: "Internal tool",
+    contribution: "Designed and built",
     metric: { value: "Hours → minutes", label: "Section 6 compilation per client, a flow run plus a short review pass" },
     techStack: [
       "Power Automate",
@@ -720,8 +734,8 @@ export const projects: Project[] = [
       {
         title: "The generated report",
         caption: "Sample output: Section 6, Summary of Key Matters, in the final Word report, generated after review and approval. Illustrative demo data with a dummy client.",
-        src: "/projects/waystone-report-automation/generated-report.png",
-        alt: "Generated Section 6 Summary of Key Matters table in the Word report",
+        src: "/projects/waystone-report-automation/generated-report-sanitized.png",
+        alt: "Synthetic example of an AI-generated quarterly compliance report section",
       },
     ],
     gallery: [],
@@ -732,34 +746,29 @@ export const projects: Project[] = [
     layout: "document",
     title: "Java Management Service",
     links: {
-      docs: "https://www.oracle.com/java/jms/",
+      docs: "https://www.oracle.com/asean/java/jms/",
     },
-    subtitle: "Platform Engineering · OCI Cloud Service · Oracle (v6.0–v11)",
+    subtitle: "Feature development, quality engineering and technical experimentation across JMS v6.0–v11",
     description:
-      "Quality-focused software engineering on Oracle's Java Management Service, covering automated validation, release integrity, and production-grade test infrastructure across six major product versions.",
+      "My primary 3.5-year role at Oracle: contributing to the development and quality engineering of Oracle Java Management Service (JMS), an OCI service for managing Java runtimes and workloads. Across releases v6.0 through v11 I worked on selected features from design and proof of concept through implementation, test planning, automation, and release validation.",
     organization: "Oracle",
     organizationHref: "https://www.oracle.com/",
     organizationIcon: "/icons/oracle.png",
     cardMeta: "Oracle · 2022–2026",
-    status: "shipped",
+    status: "role",
     period: "Oct 2022 – Apr 2026",
     featured: true,
-    metric: { value: "6", label: "major JMS releases, quality owned (v6.0–v11)" },
+    maturity: "Production",
+    contribution: "Platform contribution",
+    metric: { value: "6", label: "JMS release versions contributed to (v6.0–v11)" },
     techStack: [
       "Java",
-      "OCI",
-      "Test Automation",
-      "Canary Deployments",
-      "Grafana",
-      "Jenkins",
-      "Microservices",
+      "Oracle Cloud Infrastructure",
       "REST APIs",
-      "SCA",
-      "Vulnerability Scanning",
-      "JDK Flight Recording",
-      "Agile",
-      "Jira",
-      "Confluence",
+      "Test Automation",
+      "Jenkins",
+      "Grafana",
+      "Agile Delivery",
     ],
     detailSummary:
       "Software Engineer at Oracle with a quality engineering specialisation, owning test infrastructure, validation pipelines, and release integrity across 6 major JMS versions (v6.0–v11). Alongside that core remit, I sat in design discussions, understood the full feature lifecycle, and self-initiated three AI tools that went into production: a RAG pipeline for test spec generation, a computer vision redaction system, and a LiveLabs content generator. Quality engineering at Oracle scale teaches you to think precisely about correctness, the same discipline that makes good AI engineering.",
@@ -907,9 +916,9 @@ export const projects: Project[] = [
     id: "jms-ai-toolkit",
     layout: "document",
     title: "JMS Test Specification Generator",
-    subtitle: "Enterprise RAG pipeline",
+    subtitle: "AI-assisted test-specification generation with staged RAG and human review",
     description:
-      "A production RAG pipeline at Oracle that turns scattered product documentation into audit-grade test specifications, where every generated test traces back, line by line, to its source. Cut test-spec creation time by 60% for the JMS quality-engineering team.",
+      "An internal platform built for Oracle's JMS Software Quality Engineering team. It retrieves evidence from product documentation, derives requirements and testable assertions in reviewable stages, and generates test cases with traceability back to the supporting source passages. An Oracle SQE colleague reported a 55–60% reduction in the most time-consuming part of preparing a test specification.",
     organization: "Oracle",
     organizationHref: "https://www.oracle.com/",
     organizationIcon: "/icons/oracle.png",
@@ -917,23 +926,25 @@ export const projects: Project[] = [
     status: "shipped",
     period: "2025",
     featured: true,
+    maturity: "Internal production tool",
+    contribution: "Solo project · self-initiated",
     metric: {
-      value: "60%",
-      label: "faster spec creation · fully traceable",
+      value: "Reported 55–60%",
+      label: "time saved on spec writing · reviewable traceability",
     },
-    testimonial: {
-      image: "/projects/jms-test-spec-generator/colleague-testimonial-full.png",
-      alt: "WhatsApp message from a JMS quality engineer about the Test Specification Generator",
-      caption:
-        "Unprompted feedback from a JMS quality engineer after using the generator on a JMS 11 feature: a 55–60% cut in the most time-consuming part of spec writing, and specs solid enough to base real test code on.",
-    },
+    testimonialId: "test-spec-generator",
     techStack: [
+      "Java",
+      "Helidon SE",
+      "OCI Generative AI",
+      "OCI Knowledge Base",
       "RAG",
-      "LLM-as-judge",
-      "Citation Traceability",
-      "Human-in-the-loop",
-      "OCI GenAI",
       "Gemini",
+      "Grok",
+      "Human-in-the-Loop",
+      "RAGAS",
+      "Citation Traceability",
+      "LLM-as-judge",
     ],
     detailSummary:
       "This tool turns scattered product documentation (PRDs, design docs, feature tickets) into audit-ready test specifications. Instead of one giant AI generation, it works in five reviewable stages: retrieve the sources, extract evidence, derive requirements, then generate the test cases, and every claim in the final spec traces back to the exact source document it came from. Engineers watch progress stream in real time, can step in to review between stages, and export the finished spec to Word in one click. It runs as a shared internal web app for Oracle's JMS quality engineering team, supports multiple engineers working at once, and cut spec-writing time by 60%.",
@@ -1217,9 +1228,9 @@ export const projects: Project[] = [
     id: "data-redaction",
     layout: "document",
     title: "Sensitive Data Redaction from Images",
-    subtitle: "Automated PII Detection and Masking",
+    subtitle: "Human-reviewed multi-agent image redaction",
     description:
-      "Built a Helidon SE pipeline using OCI Vision and OCI GenAI to detect and redact sensitive data from images before publication, with a user-friendly UI where users point the tool at the bucket holding their images, review each redaction, correct it if needed, and upload the processed images back to the bucket. Reduced manual effort by 85%.",
+      "An internal, human-reviewed multi-agent system for detecting and redacting sensitive information from Oracle LiveLabs screenshots. A Helidon SE backend orchestrates Vision, Security, Redaction and Quality agents over images from OCI Object Storage; reviewers approve, correct or request edits before anything is saved back. An Oracle teammate reported approximately 80% less processing time when working with multiple images.",
     organization: "Oracle",
     organizationHref: "https://www.oracle.com/",
     organizationIcon: "/icons/oracle.png",
@@ -1227,14 +1238,21 @@ export const projects: Project[] = [
     status: "shipped",
     period: "2025",
     featured: true,
-    metric: { value: "85%", label: "reduction in manual effort" },
-    techStack: ["Java", "Helidon SE", "OCI Vision", "OCI GenAI", "OCI Object Storage", "Multi-agent", "Image Processing"],
-    testimonial: {
-      image: "/projects/redact-sensetive-data/colleague-testimonial.png",
-      alt: "Message from a colleague about the sensitive data redaction tool",
-      caption:
-        "Feedback from a colleague after adopting the tool: roughly 80% less time than manual processing when working with multiple images, with better consistency and less risk of human error.",
-    },
+    maturity: "Internal tool",
+    contribution: "Solo project · self-initiated",
+    metric: { value: "Reported ~80%", label: "less processing time on multi-image work" },
+    techStack: [
+      "Java",
+      "Helidon SE",
+      "OCI Generative AI",
+      "OCI Vision",
+      "OCI Object Storage",
+      "OCI Autonomous Database",
+      "Multi-agent Systems",
+      "Human-in-the-Loop",
+      "Image Processing",
+    ],
+    testimonialId: "sensitive-data-redaction",
     detailSummary:
       "A Helidon SE web application that ingests document images from OCI Object Storage and coordinates three AI agents, Vision for detection and OCR, Security for contextual sensitivity classification, and Redaction for masking, with a human reviewer approving every output before publication. Users point the tool at the bucket holding their images, review each proposed redaction against the original, correct it if needed, and upload the processed set back to the bucket. Reduced manual sanitization effort by 85% and was adopted internally across Oracle teams.",
     highlights: [
@@ -1404,26 +1422,27 @@ export const projects: Project[] = [
     id: "jms-livelabs-generator",
     layout: "document",
     title: "JMS LiveLabs Generator",
-    subtitle: "RAG-Powered Documentation Intelligence · Oracle (Proposed & PoC Delivered)",
+    subtitle: "RAG-powered LiveLabs authoring · Oracle internal deployment",
     description:
-      "An OCI Generative AI RAG system that ingests JMS design documents, PRDs, Figma files, API specs, meeting notes, into a knowledge base, enabling authors to generate LiveLabs tutorials and SQE test instructions via a chat interface. Proposed, costed, and PoC-delivered.",
+      "An internally deployed OCI Generative AI authoring tool that helps Oracle LiveLabs authors turn fragmented JMS product documentation and Figma designs into grounded tutorial drafts. It combines an OCI knowledge base for document retrieval with a Figma MCP connection for live design context. Peer feedback indicated approximately 60% less authoring time, and generated drafts remained subject to author review before publication.",
     organization: "Oracle",
     organizationHref: "https://www.oracle.com/",
     organizationIcon: "/icons/oracle.png",
     cardMeta: "Oracle · 2025",
-    status: "shipped",
+    status: "internal",
     period: "2025",
     featured: true,
-    metric: { value: "60%+", label: "estimated reduction in LiveLabs authoring time" },
+    maturity: "Internal tool",
+    contribution: "Solo project — self-initiated",
+    metric: { value: "Peer-reported ~60%", label: "less authoring time · internal feedback, not a controlled study" },
     techStack: [
-      "Java",
-      "OCI GenAI Agent",
+      "OCI Generative AI",
       "RAG",
-      "LLaMA",
-      "Knowledge Base",
+      "OCI Knowledge Base",
+      "Figma MCP",
       "OCI Object Storage",
+      "Human-in-the-Loop",
       "Prompt Engineering",
-      "Python",
     ],
     detailSummary:
       "LiveLabs content creation at Oracle required authors to manually research feature documentation across PRDs, one-pagers, Figma UI files, test specs, and meeting minutes before writing a single line. This project proposed and delivered a PoC for an OCI Generative AI Agent with RAG that ingests all these document types into a structured knowledge base. Authors then interact via a chat interface, similar to ChatGPT, to generate tailored LiveLabs content and SQE testing instructions from the same knowledge base. A full cost model was produced: one-time embedding, monthly OCI Object Storage, and per-query transaction costs at ~$0.018/request.",
@@ -1591,32 +1610,32 @@ export const projects: Project[] = [
     id: "agentic-ui-navigator",
     layout: "document",
     title: "Agentic UI Test Navigator",
-    subtitle: "ReAct-Pattern Browser Agent · Oracle (Research & PoC)",
+    subtitle: "Natural-language browser agent for Oracle Java Management Service testing",
     description:
-      "A ReAct-pattern agentic system built on OCI GenAI that autonomously navigates the JMS web UI to perform exploratory testing. The agent reasons, decides, and observes across 39 steps, mapping interactive elements, clicking, navigating, and completing tasks without scripted test paths.",
+      "A research proof of concept for natural-language browser workflow execution supporting Oracle Java Management Service (JMS) UI testing. A Java agent built with LangChain4j, OCI Generative AI and Selenium WebDriver interprets a tester's instruction and operates the OCI Console through six browser tools. In one representative run it discovered 238 interactive elements and completed the workflow across 39 logged execution steps.",
     organization: "Oracle",
     organizationHref: "https://www.oracle.com/",
     organizationIcon: "/icons/oracle.png",
     cardMeta: "Oracle · 2026",
-    status: "shipped",
+    status: "research",
     period: "2026",
     featured: true,
-    metric: { value: "70%", label: "target reduction in manual QA triage" },
+    maturity: "Research",
+    contribution: "Solo project — self-initiated",
+    metric: { value: "70% target", label: "reduction in manual QA triage · a project objective, not a measured result" },
     techStack: [
       "Java",
-      "OCI GenAI",
+      "Selenium WebDriver",
+      "LangChain4j",
+      "OCI Generative AI",
       "ReAct",
-      "Playwright",
-      "Browser Automation",
-      "Agentic AI",
       "Function Calling",
-      "LLM Reasoning",
-      "QA Intelligence",
+      "Browser Automation",
     ],
     detailSummary:
       "Traditional UI testing requires scripted paths, brittle, expensive to maintain, and blind to unscripted user behaviour. This project explores a ReAct-pattern agent that operates a browser autonomously using six tools: Login, Map Elements, Navigate, Click, Screenshot, and Wait. Given a natural language goal, for example, 'Start a Static Java Library Scan Work request and view the Work request', the agent decomposes the task, maps 238 interactive page elements, reasons through 39 steps using THOUGHT -> DECISION -> OBSERVATION cycles, and completes the workflow. The reasoning trace is logged in full, making the agent's decision process auditable and debuggable.",
     highlights: [
-      "ReAct reasoning framework, not scripted automation: The agent uses a THOUGHT -> DECISION -> OBSERVATION loop at every step. It detects stale element maps, decides when to re-scan, handles empty states, and self-corrects, behaviour that scripted Playwright or Selenium tests cannot replicate.",
+      "ReAct reasoning framework, not scripted automation: The agent uses a THOUGHT -> DECISION -> OBSERVATION loop at every step. It detects stale element maps, decides when to re-scan, handles empty states, and adapts at runtime, complementing deterministic regression tests.",
       "238 interactive elements mapped per page: The Map Elements tool dynamically scans and classifies every interactive element on a page (divs, buttons, anchors, SVGs, paths) giving the agent a real-time element graph to reason over, no hard-coded selectors.",
       "Full reasoning trace, auditable by design: Every reasoning step is logged with structured labels (THOUGHT, DECISION, OBSERVATION, FINAL DECISION), producing an audit trail of why the agent took each action. 39 steps. Zero scripted paths.",
     ],
@@ -1700,7 +1719,7 @@ export const projects: Project[] = [
           },
           {
             title: "Self-correction built in.",
-            body: "The agent detects stale element maps, decides when to re-scan, and handles empty states, behaviour scripted Playwright or Selenium tests cannot replicate.",
+            body: "The agent detects stale element maps, decides when to re-scan, and handles empty states at runtime.",
           },
           {
             title: "Auditable by design.",
@@ -1716,7 +1735,7 @@ export const projects: Project[] = [
         { label: "Goal", sublabel: "natural language task" },
         { label: "Map elements", sublabel: "238 interactive elements" },
         { label: "ReAct loop", sublabel: "THOUGHT → DECISION → OBSERVATION" },
-        { label: "Browser tools", sublabel: "6 tools via Playwright" },
+        { label: "Browser tools", sublabel: "6 Java tools backed by Selenium WebDriver" },
         { label: "Trace log", sublabel: "auditable, step by step" },
       ],
     },
@@ -1755,14 +1774,19 @@ export const projects: Project[] = [
     title: "PropertyLens",
     subtitle: "Explainable AI for Singapore HDB resale pricing",
     description:
-      "An end-to-end explainable valuation system for Singapore HDB resale flats, built as a NUS-ISS Intelligent Reasoning Systems group capstone. A hybrid cluster-stack regressor hits 3.92% MAPE on a strict temporal hold-out — a 68% error reduction over a single XGBoost baseline — and every prediction ships with four complementary explanations: SHAP driver attributions, comparable past sales, counterfactual offer bands, and market sanity rules.",
+      "PropertyLens is a working NUS-ISS capstone prototype that helps HDB buyers and sellers estimate resale value and understand the factors behind a prediction. Built on roughly 900,000 public transactions, its cluster-routed ensemble achieved 3.92% MAPE on a temporal test set. In a three-person team, I owned the React frontend, hybrid cluster-stack model, and explainability layer.",
     organization: "NUS-ISS capstone",
     organizationHref: "https://www.iss.nus.edu.sg/",
     organizationIcon: "/icons/nus-iss.svg",
     cardMeta: "NUS-ISS · 2026",
-    status: "shipped",
+    status: "prototype",
     period: "Jan 2026 – May 2026",
+    links: {
+      github: "https://github.com/cloudriver-yc/PropertyLens",
+    },
     featured: true,
+    maturity: "Capstone",
+    contribution: "Team of 3 · my scope: React frontend, hybrid model and XAI",
     techStack: [
       "Python",
       "FastAPI",
@@ -1839,7 +1863,7 @@ export const projects: Project[] = [
       {
         title: "Photo condition CNN — pricing what no dataset captures",
         description:
-          "No labelled HDB-interior condition dataset exists, so I trained EfficientNet-B0 on a proxy: LSUN bedroom photos labelled with LAION aesthetic scores (a CLIP ViT-L/14 head). Validation MAE: 0.483 on a 0–10 scale. The score drives a rule-based, bounded ±10% price adjustment — deliberately, because a clean photo shouldn't turn a $400k flat into a $500k flat, and a bounded rule also defends against adversarial uploads.",
+          "No labelled HDB-interior condition dataset exists, so the team trained EfficientNet-B0 on a proxy: LSUN bedroom photos labelled with LAION aesthetic scores (a CLIP ViT-L/14 head). Validation MAE: 0.483 on a 0–10 scale. The score drives a rule-based, bounded ±10% price adjustment — deliberately, because a clean photo shouldn't turn a $400k flat into a $500k flat, and a bounded rule also defends against adversarial uploads.",
         bullets: ["LSUN + LAION proxy training", "Validation MAE 0.483", "Bounded ±10% adjustment"],
       },
     ],
@@ -1988,36 +2012,33 @@ export const projects: Project[] = [
         challenge:
           "The photo CNN never saw an HDB interior in training.",
         solution:
-          "Qualitative testing on real PropertyGuru photos showed the LAION aesthetic signal (lighting, clutter, staging) transfers surprisingly well — but I kept the adjustment bounded and overridable precisely because the training distribution doesn't match production.",
+          "Qualitative testing on real PropertyGuru photos showed the LAION aesthetic signal (lighting, clutter, staging) transfers surprisingly well — but the team kept the adjustment bounded and overridable precisely because the training distribution doesn't match production.",
       },
     ],
   },
   {
     id: "explainable-ai-web-app",
     layout: "document",
-    title: "XAI Dashboard, Explainable ML Web Application",
-    subtitle: "Interactive Model Explanation Platform · A*STAR Research Collaboration · Final Year Project",
+    title: "Explainable AI Dashboard",
+    subtitle: "No-code data and model explanation research prototype",
     description:
-      "A Flask + Dash web application where users upload any trained scikit-learn model and dataset and instantly receive an interactive XAI dashboard, SHAP, LIME, permutation importance, ICE plots, surrogate decision trees, and live what-if analysis. No code required.",
-    organization: "A*STAR · NUS",
-    cardMeta: "A*STAR · NUS · 2020–2021",
-    status: "shipped",
+      "A final-year research prototype developed in collaboration with A*STAR to make machine-learning explanations more accessible to users without specialist XAI programming experience, through a Flask and Dash interface for data exploration and model explanation.",
+    organization: "A*STAR Research Collaboration · Coventry University / PSB Academy",
+    cardMeta: "A*STAR Research Collaboration · Coventry University / PSB Academy · 2020–2021",
+    status: "research",
     period: "Sep 2020 – Apr 2021",
-    metric: { value: "5+", label: "XAI techniques: SHAP · LIME · ICE · Surrogate Tree · What-if" },
+    maturity: "Capstone",
+    contribution: "Solo project — A*STAR-mentored final year project",
     techStack: [
       "Python",
       "Flask",
       "Dash",
+      "Plotly",
+      "scikit-learn",
       "SHAP",
-      "LIME",
       "eli5",
       "pdpbox",
-      "scikit-learn",
-      "Plotly",
       "ExplainerDashboard",
-      "Bootstrap",
-      "HTML",
-      "CSS",
     ],
     links: {
       github: "https://github.com/bhuveshsharma09/Web-application-XAI",

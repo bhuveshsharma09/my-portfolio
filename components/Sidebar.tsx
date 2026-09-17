@@ -8,7 +8,6 @@ import {
   GraduationCap,
   FolderKanban,
   Wrench,
-  Users,
   PenLine,
   Mail,
 } from "lucide-react"
@@ -23,7 +22,6 @@ const navItems = [
   { href: "/education", label: "Education", icon: GraduationCap },
   { href: "/blog", label: "Blog", icon: PenLine },
   { href: "/skills", label: "Skills", icon: Wrench },
-  { href: "/community", label: "Community", icon: Users },
   { href: "/contact", label: "Contact", icon: Mail },
 ]
 
@@ -66,7 +64,12 @@ export function Sidebar() {
         {siteConfig.openToWork && (
           <div>
             {pathname !== "/" && (
-              <StatusBadge text={siteConfig.badgeText} variant="success" pulse />
+              <StatusBadge
+                text={siteConfig.badgeText}
+                variant="success"
+                pulse
+                className="gap-1.5 whitespace-nowrap px-2.5 py-1 text-[11px]"
+              />
             )}
             {siteConfig.social.resume && (
               <Link

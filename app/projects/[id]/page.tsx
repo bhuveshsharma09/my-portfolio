@@ -20,9 +20,11 @@ import {
   XaiMethodsTabs,
 } from "@/components/projects/property-lens-visuals"
 import { ProjectVisualCard } from "@/components/project-visual-card"
+import { InitialsAvatar } from "@/components/initials-avatar"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getProjectById, projects } from "@/data/projects"
+import { getTestimonialById } from "@/data/testimonials"
 
 type PageProps = {
   params: Promise<{
@@ -50,6 +52,26 @@ const statusConfig = {
     icon: PencilRuler,
     label: "Designed · Paused",
     className: "bg-slate-100 text-slate-600 border-slate-200",
+  },
+  research: {
+    icon: PencilRuler,
+    label: "Research PoC",
+    className: "bg-slate-100 text-slate-600 border-slate-200",
+  },
+  prototype: {
+    icon: PencilRuler,
+    label: "Working prototype",
+    className: "bg-slate-100 text-slate-600 border-slate-200",
+  },
+  role: {
+    icon: CheckCircle2,
+    label: "Core Oracle role",
+    className: "bg-slate-100 text-slate-600 border-slate-200",
+  },
+  internal: {
+    icon: CheckCircle2,
+    label: "Internal deployment",
+    className: "bg-green/10 text-green border-green/20",
   },
 }
 
@@ -136,6 +158,7 @@ function DocumentDetail({
   StatusIcon: typeof CheckCircle2
 }) {
   const story = project.story
+  const testimonial = project.testimonialId ? getTestimonialById(project.testimonialId) : undefined
   const hasVideos = Boolean(
     project.videos?.length || project.videoPlaceholder.youtubeId || project.videoPlaceholder.title
   )
@@ -160,7 +183,7 @@ function DocumentDetail({
     project.challenges?.length ? { id: "challenges", label: "Challenges" } : null,
     project.impactMetrics?.length || project.beforeAfter ? { id: "results", label: "Results" } : null,
     project.linkedinEmbed ? { id: "linkedin", label: "LinkedIn post" } : null,
-    project.testimonial ? { id: "testimonial", label: "Testimonial" } : null,
+    testimonial ? { id: "testimonial", label: "Testimonial" } : null,
   ].filter(Boolean) as { id: string; label: string }[]
 
   return (
@@ -210,7 +233,7 @@ function DocumentDetail({
                 {project.period}
               </span>
             ) : null}
-            {project.testimonial ? (
+            {testimonial ? (
               <a
                 href="#testimonial"
                 title="Jump to the colleague testimonial"
@@ -228,6 +251,18 @@ function DocumentDetail({
               >
                 <Linkedin className="h-3.5 w-3.5" />
                 Post
+              </a>
+            ) : null}
+            {project.productLink ? (
+              <a
+                href={project.productLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={project.productLink.ariaLabel}
+                className="inline-flex items-center gap-1.5 rounded-full border border-green/20 bg-green/10 px-3 py-1 text-xs font-medium text-green transition-colors hover:bg-green/20"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" />
+                {project.productLink.label}
               </a>
             ) : null}
           </div>
@@ -705,19 +740,37 @@ function DocumentDetail({
           </DocSection>
         ) : null}
 
-        {project.testimonial ? (
+        {testimonial ? (
           <DocSection eyebrow="Testimonial" title="From a teammate" id="testimonial">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.testimonial.image}
-              alt={project.testimonial.alt ?? "Colleague testimonial"}
-              className="w-full max-w-2xl rounded-xl border border-neutral-200"
-            />
-            {project.testimonial.caption ? (
-              <p className="max-w-2xl text-sm italic leading-6 text-muted-foreground">
-                {project.testimonial.caption}
-              </p>
-            ) : null}
+            <figure className="max-w-2xl rounded-xl border border-neutral-200 p-5">
+              <div className="flex items-center gap-3">
+                <InitialsAvatar name={testimonial.name} className="h-10 w-10 text-sm" />
+                <div className="min-w-0">
+                  <Link
+                    href={testimonial.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors hover:text-orange"
+                  >
+                    {testimonial.name}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                </div>
+              </div>
+              <blockquote className="mt-3 text-sm italic leading-6 text-muted-foreground">
+                &ldquo;{testimonial.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs text-muted-foreground">
+                  {testimonial.context} · via {testimonial.source}
+                  {testimonial.date ? ` · ${testimonial.date}` : ""}
+                </span>
+                <span className="shrink-0 whitespace-nowrap rounded-full bg-orange/10 px-2.5 py-1 text-xs font-semibold text-orange">
+                  {testimonial.metric}
+                </span>
+              </figcaption>
+            </figure>
           </DocSection>
         ) : null}
       </div>
@@ -725,8 +778,14 @@ function DocumentDetail({
   )
 }
 
+const BESPOKE_PROJECT_ROUTES = ["waystone-report-automation", "bizagento", "jms-ai-toolkit", "data-redaction", "waystone-time-utilization", "agentic-ui-navigator", "hdb-resale-xai", "jms", "jms-livelabs-generator", "explainable-ai-web-app"]
+
 export function generateStaticParams() {
-  return projects.map((project) => ({ id: project.id }))
+  // These ids have their own dedicated static route (app/projects/<id>/page.tsx)
+  // with a bespoke case-study layout, so they're excluded here to avoid a route conflict.
+  return projects
+    .filter((project) => !BESPOKE_PROJECT_ROUTES.includes(project.id))
+    .map((project) => ({ id: project.id }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

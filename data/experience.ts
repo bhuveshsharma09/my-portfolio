@@ -4,11 +4,12 @@ export interface Experience {
   company: string
   companyHref?: string
   location: string
-  type: "Full time" | "Internship" | "Part time" | "Volunteer"
-  mode: "On site" | "Remote" | "Hybrid"
+  type: "Full-time" | "Internship" | "Part-time" | "Volunteer"
+  mode: "On-site" | "Remote" | "Hybrid"
   startDate: string
   endDate: string | "Present"
   description: string
+  evidenceNote?: string
   linkLabel?: string
   linkHref?: string
   descriptionSuffix?: string
@@ -30,14 +31,14 @@ export const experiences: Experience[] = [
     startDate: "Jun 2026",
     endDate: "Jul 2026",
     description:
-      "Built internal automation end-to-end on Microsoft Power Platform, from a consultant time-tracking system to AI-powered compliance reporting, owning requirements, architecture, build, and production handoff.",
+      "Built two internal automation systems for compliance operations: a consultant time-utilization platform and an AI-assisted quarterly reporting workflow. I led workflow discovery with consultants and managers, then designed and implemented the solutions within Waystone’s governed Microsoft Power Platform environment.",
     highlights: [
-      "Built a time utilization tracking system on Power Platform: star-schema SharePoint data model, Power Apps canvas app for consultant time entry, and a Power BI dashboard for billable utilization and fees per client",
-      "Automated quarterly compliance reporting with an AI-powered map-reduce pipeline (Power Automate + GPT-4.1 mini) for email classification, extraction, and Word report generation",
-      "Designed a client compliance interface for document uploads, monitoring plans, and automated client reminder flows",
-      "Delivered a Power Automate workshop for the team and produced branded technical documentation for all systems",
+      "Replaced spreadsheet-based time entry with a five-screen Power Apps experience backed by a five-list SharePoint data model and Power BI reporting for utilization, retainers, fees and write-offs.",
+      "Built a quarterly reporting pipeline using Power Automate and GPT-4.1 mini to classify email evidence, extract structured findings and generate review-ready Word reports.",
+      "Designed compliance interfaces for document intake, monitoring plans and automated reminder workflows.",
+      "Enabled team adoption through a Power Automate workshop and branded technical documentation.",
     ],
-    techTags: ["Power BI", "Power Automate", "Power Apps", "SharePoint", "GPT-4.1 mini"],
+    techTags: ["Power Apps", "Power Automate", "Power BI", "SharePoint", "GPT-4.1 mini"],
     projectIds: ["waystone-time-utilization", "waystone-report-automation"],
   },
   {
@@ -50,17 +51,15 @@ export const experiences: Experience[] = [
     mode: "Remote",
     startDate: "May 2026",
     endDate: "Jun 2026",
-    description: "Built ",
-    linkLabel: "BizAgento",
-    linkHref: "https://www.linkedin.com/company/bizagento/posts/?feedView=all",
-    descriptionSuffix:
-      ", a self-hosted, local-LLM-first workflow automation and AI agent platform for regulated businesses that cannot use cloud tools.",
+    description:
+      "Worked directly with the founder to extend BizAgento’s existing codebase, a self-hosted workflow automation platform that can use locally hosted LLMs. I independently owned product discovery, UI/UX design and implementation of new workflow capabilities, incorporating founder feedback throughout development.",
     highlights: [
-      "Designed and shipped a fully local RAG pipeline using Ollama embeddings (nomic-embed-text) and sqlite-vec, with async document ingestion and per-document status tracking",
-      "Developed core workflow features: visual canvas nodes (React Flow), dry-run test mode, workflow import/export with automatic secret stripping, and a DB-backed schedule/cron trigger with timezone and missed-run handling",
-      "Built security-first capabilities for regulated buyers: tamper-evident hash-chained audit logging, zero-egress enforcement, and full-instance backup/restore",
+      "Researched competing platforms including n8n and Zapier, then translated feature gaps into a prioritized roadmap with implementation requirements.",
+      "Designed and developed workflow capabilities including new node types, scheduling, run history, debugging and dry-run evaluation.",
+      "Created data, input, LLM, flow and RAG-related workflow experiences.",
+      "Integrated Ollama-based local AI execution so supported workflows could process enterprise data using locally hosted models.",
     ],
-    techTags: ["Node.js", "React", "SQLite", "Ollama/vLLM", "Local LLM Inference"],
+    techTags: ["React", "Node.js", "SQLite", "Ollama", "React Flow"],
     projectIds: ["bizagento"],
   },
   {
@@ -69,20 +68,21 @@ export const experiences: Experience[] = [
     company: "Oracle",
     companyHref: "https://www.oracle.com/",
     location: "Singapore",
-    type: "Full time",
-    mode: "On site",
+    type: "Full-time",
+    mode: "On-site",
     startDate: "Oct 2022",
     endDate: "Apr 2026",
-    description: "3.5 years on Oracle's ",
-    linkLabel: "Java Management Service",
-    linkHref: "https://www.oracle.com/asean/java/jms/",
-    descriptionSuffix:
-      " (v6.0–v11), platform quality engineering across 6 releases, and 3 self-initiated AI tools shipped to production on OCI.",
+    description:
+      "Spent 3.5 years developing and testing Java Management Service features across multiple releases while also planning and building internal AI tools and proof-of-concepts for software quality engineering. My work covered Java services, OCI Generative AI, RAG, test automation and cross-functional release delivery.",
+    evidenceNote:
+      "Peer feedback indicated approximately 55–60% lower effort for the most time-intensive document-drafting stage of test-specification work. A teammate reported approximately 80% less processing time for multi-image redaction. Both figures are reported feedback, not measured studies.",
     highlights: [
-      "Contributed across every JMS release from v6.0 to v11",
-      "Built enterprise AI tools on OCI for test generation and workflow automation",
-      "Partnered across globally distributed engineering, product, and QA teams",
+      "Contributed development and quality-engineering work across Java Management Service releases spanning v6.0–v11, collaborating with product, engineering and globally distributed QA teams.",
+      "Built an internal RAG-assisted test-specification generator using OCI Generative AI and a traceable knowledge base, with human-in-the-loop review and multiple interaction modes.",
+      "Built a multi-agent image-redaction workflow for LiveLabs screenshots, combining automated detection and redaction with human review.",
+      "Developed additional prototypes for AI-assisted LiveLabs generation and natural-language-driven UI testing.",
     ],
+    techTags: ["Java", "Helidon SE", "OCI Generative AI", "RAG", "Selenium"],
     projectIds: ["jms", "jms-ai-toolkit", "data-redaction", "jms-livelabs-generator", "agentic-ui-navigator"],
   },
   {
@@ -92,16 +92,17 @@ export const experiences: Experience[] = [
     companyHref: "https://www.oracle.com/",
     location: "Singapore",
     type: "Internship",
-    mode: "On site",
+    mode: "On-site",
     startDate: "Mar 2022",
     endDate: "Jul 2022",
     description:
-      "Built and published Oracle LiveLabs tutorials for OCI, JMS, and network configurations while automating internal software release processes with scripting and CI/CD.",
+      "Built and published hands-on Oracle LiveLabs tutorials covering OCI, Java Management Service and network configuration, while automating recurring internal release activities.",
     highlights: [
-      "Published LiveLabs tutorials for OCI and JMS",
-      "Automated release processes with scripting and CI/CD pipelines",
-      "Worked inside Oracle cloud engineering workflows",
+      "Authored and validated step-by-step LiveLabs against current Oracle Cloud workflows.",
+      "Automated recurring release tasks using scripting and CI/CD pipelines.",
+      "Collaborated with engineering and quality teams to verify technical accuracy before publication.",
     ],
+    techTags: ["OCI", "CI/CD", "LiveLabs"],
   },
   {
     id: "exicom",
@@ -109,17 +110,18 @@ export const experiences: Experience[] = [
     company: "Exicom",
     companyHref: "https://www.exicom.com/",
     location: "India",
-    type: "Full time",
-    mode: "On site",
+    type: "Full-time",
+    mode: "On-site",
     startDate: "Jul 2016",
     endDate: "Nov 2019",
     description:
-      "Developed automated test setups and Python scripts for validating electronic devices and EV chargers, improving production processes with data-driven root cause analysis.",
+      "Developed Python-based automation and repeatable validation setups for electronic devices and EV chargers. Analyzed test failures, investigated root causes and supported engineering and production teams with data-driven findings.",
     highlights: [
-      "Built automated validation setups for EV chargers",
-      "Used Python scripting for test automation",
-      "Improved production quality with root cause analysis",
+      "Built repeatable automated test setups for EV-charging hardware.",
+      "Wrote Python utilities to automate validation and test-data collection.",
+      "Analyzed recurring failures and documented root causes for engineering and production teams.",
     ],
+    techTags: ["Python", "Test Automation", "Hardware Validation", "EV Charging"],
   },
 ]
 
@@ -127,8 +129,11 @@ export interface Education {
   id: string
   degree: string
   institution: string
+  institutionHref?: string
+  institutionIcon?: string
   location: string
   period: string
+  studyMode?: "Full-time" | "Part-time"
   status?: "In Progress" | "Completed"
   gpa?: string
   achievement?: string
@@ -139,101 +144,110 @@ export interface Education {
 export const education: Education[] = [
   {
     id: "nus-mtech",
-    degree: "MTech in Artificial Intelligence Systems",
-    institution: "NUS-ISS",
+    degree: "Master of Technology in Artificial Intelligence Systems",
+    institution: "National University of Singapore (NUS-ISS)",
+    institutionHref: "https://www.iss.nus.edu.sg/",
+    institutionIcon: "/icons/nus-iss.svg",
     location: "Singapore",
-    period: "Jan 2026 – 2027",
+    period: "Jan 2026 – Expected Dec 2027",
+    studyMode: "Full-time",
     status: "In Progress",
+    achievement: "Graduate Certificate in Intelligent Reasoning Systems · A+",
     description:
-      "Full-time, in progress. Coursework is centered on production-oriented AI systems, model understanding, and deployment.",
+      "Practice-focused postgraduate study in the design, development and deployment of intelligent systems, with an emphasis on explainable AI, knowledge-based reasoning, agentic systems and production-oriented AI engineering.",
     subjects: [
-      "Machine Reasoning",
-      "Cognitive Systems",
-      "Reasoning Systems",
-      "Problem Solving using Pattern Recognition",
-      "Intelligent Sensing and Sense Making",
-      "Pattern Recognition and Machine Learning Systems",
-      "Robotic Systems",
-      "Autonomous Robots and Vehicles",
-      "Human-Robot System Engineering",
+      "Intelligent Reasoning Systems",
+      "Pattern Recognition Systems",
+      "Practical Language Processing",
       "Explainable and Responsible AI",
-      "AI and Cybersecurity",
-      "Architecting Agentic AI Solutions",
-      "Deploying and Operating AI Solutions",
+      "Agentic AI Systems",
+      "AI Deployment and Operations",
     ],
   },
   {
     id: "nus-gdip",
     degree: "Graduate Diploma in Systems Analysis",
-    institution: "NUS-ISS",
+    institution: "National University of Singapore (NUS-ISS)",
+    institutionHref: "https://www.iss.nus.edu.sg/",
+    institutionIcon: "/icons/nus-iss.svg",
     location: "Singapore",
     period: "Jul 2021 – Aug 2022",
     status: "Completed",
     gpa: "4.92/5",
-    achievement: "Distinction | ISS Prize (2nd best)",
+    achievement: "Distinction · ISS Prize recipient for second-highest overall performance",
     description:
-      "Built full-stack applications using Java, Spring Boot, C#, .NET, and Android while working in agile team environments across group projects.",
+      "Completed an intensive software-development programme covering requirements analysis, solution design, full-stack implementation, testing, Agile delivery and CI/CD.",
     subjects: [
-      "Digital Solutions Development – Design",
-      "Digital Solutions Development – Web Applications",
-      "Digital Solutions Development – Mobile Applications",
-      "Digital Solutions Development – Machine Learning Applications",
-      "Digital Solutions Development – Agile Software Delivery",
-      "Capstone & Internship",
+      "Requirements and solution design",
+      "Java and Python",
+      "C# and ASP.NET MVC",
+      "Web application development",
+      "Mobile application development",
+      "Agile and CI/CD delivery",
     ],
   },
   {
     id: "iit-roorkee",
-    degree: "PG Certificate in Data Science & ML",
-    institution: "IIT Roorkee",
+    degree: "Post Graduate Certificate Program in Data Science & Machine Learning",
+    institution: "Indian Institute of Technology Roorkee",
+    institutionHref: "https://www.iitr.ac.in/",
+    institutionIcon: "/icons/iit-roorkee.png",
     location: "India",
-    period: "2021 – 2022",
+    period: "2021–2022",
+    studyMode: "Part-time",
     status: "Completed",
-    achievement: "1st place, Machine Learning Hackathon (Oct 2021)",
+    achievement: "First place · Machine Learning Hackathon · Oct 2021",
     description:
-      "Part-time study focused on machine learning models, data processing, and statistical methods.",
+      "Developed practical foundations in statistics, exploratory data analysis, supervised and unsupervised learning, natural language processing and deep-learning methods.",
     subjects: [
+      "Statistical analysis",
+      "Data preprocessing and visualization",
       "Supervised learning",
       "Unsupervised learning",
-      "Data preprocessing",
-      "Statistical methods",
+      "Natural language processing",
       "Model evaluation",
     ],
   },
   {
     id: "coventry",
-    degree: "BSc Computer Science",
-    institution: "Coventry University",
+    degree: "Bachelor of Science in Computer Science",
+    institution: "Coventry University · PSB Academy",
+    institutionHref: "https://www.coventry.ac.uk/",
+    institutionIcon: "/icons/coventry.png",
     location: "Singapore",
     period: "2019 – 2021",
     status: "Completed",
-    achievement: "First Class Honours | Top graduate",
+    achievement: "First Class Honours · Top Graduate, Mar 2021",
     description:
-      "Studied Python, software development methodologies, architectural patterns, and design principles.",
+      "Built a software-engineering foundation across programming, data structures, application development, architectural patterns and Agile delivery through individual and team projects.",
     subjects: [
-      "Python programming",
-      "Software development methodologies",
-      "Architectural patterns",
-      "Design principles",
-      "Computer science fundamentals",
+      "Java and Python",
+      "Data structures and algorithms",
+      "Software engineering",
+      "Architectural and design patterns",
+      "Web and mobile development",
+      "Agile delivery",
     ],
   },
   {
     id: "istc",
-    degree: "Advanced Diploma in Mechatronics & Automation",
+    degree: "Advanced Diploma in Mechatronics, Robotics and Automation Engineering",
     institution: "Indo Swiss Training Centre",
+    institutionHref: "https://istc.csio.res.in/",
+    institutionIcon: "/icons/istc.png",
     location: "India",
     period: "2012 – 2016",
     status: "Completed",
+    achievement: "Silver Medalist",
     description:
-      "Foundation in electronics, robotics, and automation systems with hands-on embedded hardware work.",
+      "Built an engineering foundation spanning electronics, embedded programming, industrial automation, robotics and hands-on mechanical systems.",
     subjects: [
       "Electronics",
+      "Embedded C and Python",
+      "PLC and ladder programming",
+      "Industrial automation",
       "Robotics",
-      "Automation systems",
-      "Raspberry Pi",
-      "Microcontrollers",
-      "Mechatronics projects",
+      "Mechanical systems",
     ],
   },
 ]
@@ -242,47 +256,115 @@ export interface Certification {
   id: string
   name: string
   issuer: string
+  issued?: string
+  credentialId?: string
+  credentialUrl?: string
+  note?: string
+  group?: "primary" | "additional"
   featured?: boolean
 }
 
 export const certifications: Certification[] = [
   {
-    id: "oci-generative-ai-professional",
-    name: "OCI Generative AI Professional",
-    issuer: "Oracle · OCI Academy",
+    id: "nus-graduate-certificate-irs",
+    name: "Graduate Certificate in Intelligent Reasoning Systems",
+    issuer: "National University of Singapore",
+    issued: "Jul 2026",
+    credentialId: "187128427",
+    group: "primary",
     featured: true,
   },
   {
-    id: "ai-engineer-core-track",
-    name: "AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents",
-    issuer: "Udemy · Ed Donner",
+    id: "llm-engineering",
+    name: "LLM Engineering: Master AI, Large Language Models & Agents",
+    issuer: "Udemy",
+    issued: "Nov 2025",
+    note: "Course certificate",
+    group: "primary",
     featured: true,
   },
   {
     id: "vector-databases-for-rag",
     name: "Vector Databases for RAG: An Introduction",
     issuer: "IBM",
+    issued: "Oct 2025",
+    group: "primary",
     featured: true,
+  },
+  {
+    id: "build-rag-applications",
+    name: "Build RAG Applications: Get Started",
+    issuer: "IBM",
+    issued: "Oct 2025",
+    group: "primary",
+  },
+  {
+    id: "machine-learning-explainability",
+    name: "Machine Learning Explainability",
+    issuer: "Kaggle",
+    issued: "Oct 2020",
+    group: "primary",
   },
   {
     id: "neural-networks-and-deep-learning",
     name: "Neural Networks and Deep Learning",
-    issuer: "Coursera · deeplearning.ai",
+    issuer: "DeepLearning.AI",
+    issued: "Apr 2021",
+    group: "primary",
   },
   {
     id: "improving-deep-neural-networks",
     name: "Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization",
-    issuer: "Coursera · deeplearning.ai",
+    issuer: "DeepLearning.AI",
+    issued: "Jun 2021",
+    group: "primary",
   },
   {
-    id: "llm-engineering",
-    name: "LLM Engineering: Master AI, Large Language Models & Agents",
+    id: "oci-generative-ai-professional",
+    name: "OCI Generative AI Professional",
+    issuer: "Oracle",
+    group: "additional",
+  },
+  {
+    id: "ai-engineer-core-track",
+    name: "AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents",
     issuer: "Udemy",
+    note: "Course certificate",
+    group: "additional",
   },
   {
     id: "python-for-data-science-and-machine-learning",
     name: "Python for Data Science and Machine Learning Bootcamp",
     issuer: "Udemy",
+    note: "Course certificate",
+    group: "additional",
+  },
+]
+
+export interface VolunteerExperience {
+  id: string
+  role: string
+  organization: string
+  organizationHref: string
+  organizationIcon?: string
+  marker: "Volunteer"
+  dates: string
+  location: string
+  description: string
+}
+
+export const volunteerExperience: VolunteerExperience[] = [
+  {
+    id: "better-sg-volunteer",
+    role: "AI Engineer",
+    organization: "better.sg",
+    organizationHref: "https://better.sg/",
+    organizationIcon: "/icons/better-sg.png",
+    marker: "Volunteer",
+    dates: "Mar 2026 – Present",
+    location: "Singapore",
+    description:
+      "Contributing AI engineering support to LLM-powered tools designed for Singapore nonprofit organisations.",
   },
 ]
 
@@ -290,45 +372,41 @@ export interface CommunityRole {
   id: string
   title: string
   organization: string
+  organizationHref: string
+  organizationIcon?: string
   dates: string
+  secondary?: string
   description: string
 }
 
 export const communityRoles: CommunityRole[] = [
   {
-    id: "scs-ai-vp",
+    id: "scs",
     title: "Vice President, AI Focus Group",
     organization: "Singapore Computer Society",
+    organizationHref: "https://www.scs.org.sg/",
+    organizationIcon: "/icons/scs.png",
     dates: "2020 – 2021",
-    description: "Led AI community programmes and knowledge sharing.",
+    secondary: "Member · 2025 – Present",
+    description: "Led AI-focused community programmes and knowledge-sharing initiatives.",
   },
   {
-    id: "gdsc-product-designer",
-    title: "Product Designer (External)",
+    id: "gdsc-nus",
+    title: "Product Design Contributor",
     organization: "Google Developer Student Clubs NUS",
+    organizationHref: "https://developers.google.com/community/gdsc",
+    organizationIcon: "/icons/gdsc.png",
     dates: "2021 – 2022",
-    description: "UX and product design for developer community events.",
+    description: "Contributed UX and product design for developer-community events and initiatives.",
   },
   {
-    id: "better-sg-volunteer",
-    title: "AI Engineer (Volunteer)",
-    organization: "better.sg",
-    dates: "Mar 2026 – present",
-    description: "Building LLM-powered tools for Singapore nonprofits.",
-  },
-  {
-    id: "willing-hearts-volunteer",
-    title: "Volunteer",
-    organization: "Willing Hearts Soup Kitchen",
-    dates: "2025 – present",
-    description: "Weekly volunteer at Singapore's largest free meal programme.",
-  },
-  {
-    id: "scs-member",
-    title: "Member",
-    organization: "Singapore Computer Society",
-    dates: "2025 – present",
-    description: "Active member of Singapore's largest ICT society.",
+    id: "willing-hearts",
+    title: "Weekly Volunteer",
+    organization: "Willing Hearts",
+    organizationHref: "https://willinghearts.org.sg/",
+    organizationIcon: "/icons/willing-hearts.png",
+    dates: "2025 – Present",
+    description: "Volunteer weekly with a Singapore-based free-meal programme.",
   },
 ]
 
@@ -349,43 +427,50 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Languages",
-    tags: ["Python", "Java", "TypeScript", "SQL", "C#", ".NET", "Shell Scripting", "KQL", "DAX"],
+    title: "Languages and querying",
+    tags: ["Python", "Java", "TypeScript", "SQL", "Shell scripting", "DAX", "KQL"],
   },
   {
-    title: "LLMs & Agentic AI",
-    tags: ["RAG Pipelines", "Agentic AI", "LLM Orchestration", "Prompt Engineering", "LLM-as-Judge", "LLM Evaluation", "Vector Databases", "MCP", "Local LLM Inference (Ollama)", "Human-in-the-Loop AI", "Knowledge Graphs"],
+    title: "AI platforms and methods",
+    tags: ["OCI Generative AI", "Ollama", "LangChain4j", "MCP", "Prompt engineering", "RAGAS"],
   },
   {
-    title: "Machine Learning",
-    tags: ["Supervised Learning", "Unsupervised Learning", "XGBoost", "LightGBM", "Stacking Ensembles", "K-Means Clustering", "Feature Engineering", "Recommender Systems", "Model Evaluation"],
+    title: "Machine learning",
+    tags: ["scikit-learn", "XGBoost", "LightGBM", "SHAP", "Stacking ensembles", "K-Means clustering", "Surrogate models"],
   },
   {
-    title: "Explainable AI",
-    tags: ["SHAP", "LIME", "Counterfactuals", "Case-Based Reasoning", "Surrogate Models", "Association Rules"],
-  },
-  {
-    title: "Deep Learning, CV & NLP",
-    tags: ["PyTorch", "TensorFlow", "CNNs", "EfficientNet", "Transfer Learning", "Transformers", "Hugging Face", "Text Classification", "NER"],
-  },
-  {
-    title: "Backend & APIs",
-    tags: ["FastAPI", "Flask", "Node.js", "Fastify", "Spring Boot", "Helidon SE", "REST APIs", "Zod", "JWT Auth"],
+    title: "Backend and APIs",
+    tags: ["Helidon SE", "Spring Boot", "FastAPI", "Flask", "Dash", "Node.js", "Fastify", "REST APIs"],
   },
   {
     title: "Frontend",
-    tags: ["React", "Next.js", "React Flow", "React Query", "Zustand", "Tailwind CSS", "Vite"],
+    tags: ["React", "Next.js", "React Flow", "React Query", "Zustand", "Tailwind CSS"],
   },
   {
-    title: "Data & Storage",
-    tags: ["SQLite", "Neo4j", "MongoDB", "SharePoint Lists", "sqlite-vec", "OCI Object Storage"],
+    title: "Data and infrastructure",
+    tags: ["SQLite", "sqlite-vec", "Neo4j", "SharePoint Lists", "OCI Object Storage", "Oracle Cloud (OCI)", "Git", "CI/CD", "Jenkins"],
   },
   {
-    title: "Microsoft Power Platform",
-    tags: ["Power Apps", "Power Automate", "Power BI", "Power Query", "AI Builder", "SharePoint"],
+    title: "Testing and observability",
+    tags: ["Selenium WebDriver", "Test automation", "Canary validation", "Grafana"],
   },
   {
-    title: "Cloud & DevOps",
-    tags: ["Oracle Cloud (OCI)", "AWS", "Docker", "Jenkins", "CI/CD", "Git", "Grafana", "Canary Deployments", "Playwright", "Test Automation"],
+    title: "Microsoft platform",
+    tags: ["Power Apps", "Power Automate", "Power BI", "Power Query", "SharePoint", "AI Builder"],
+  },
+]
+
+export const additionalExposure: SkillCategory[] = [
+  {
+    title: "Academic coursework and certifications",
+    tags: ["C#", ".NET (ASP.NET MVC)", "PyTorch", "TensorFlow", "CNNs", "Transformers", "Hugging Face", "Text classification and NER"],
+  },
+  {
+    title: "Secondary project exposure",
+    tags: ["LIME", "Case-based reasoning", "Zod", "JWT authentication"],
+  },
+  {
+    title: "Currently learning",
+    tags: ["LangGraph"],
   },
 ]

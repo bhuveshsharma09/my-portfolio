@@ -24,7 +24,7 @@ export function HeroSection() {
             </h1>
 
             <p className="text-h2 mt-4">
-              An {siteConfig.title} based in {siteConfig.location}.
+              An {siteConfig.title}.
             </p>
 
             {siteConfig.company.split(" · ").map((line, index) => (

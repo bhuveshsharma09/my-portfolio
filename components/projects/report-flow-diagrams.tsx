@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 type FlowBoxProps = {
   title: string
-  sub: string
+  sub?: string
   variant?: "neutral" | "problem" | "warn" | "good" | "flow" | "ai" | "app"
   className?: string
 }
@@ -20,7 +20,7 @@ export function FlowBox({ title, sub, variant = "neutral", className }: FlowBoxP
   return (
     <div className={cn("rounded-xl border px-4 py-2.5 text-center", styles, className)}>
       <p className="text-sm font-semibold">{title}</p>
-      <p className="text-xs opacity-80">{sub}</p>
+      {sub ? <p className="text-xs opacity-80">{sub}</p> : null}
     </div>
   )
 }
@@ -29,87 +29,48 @@ export function Arrow() {
   return <span aria-hidden className="shrink-0 text-neutral-400">→</span>
 }
 
-function FixBar({ text }: { text: string }) {
-  return (
-    <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-center text-xs font-medium text-emerald-900">
-      {text}
-    </div>
-  )
-}
-
 export function ManualProcessFlow() {
   return (
     <div className="rounded-2xl border border-neutral-200/80 bg-white p-5">
       <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        The manual process, every quarter, per client
+        Before
       </p>
       <div className="flex flex-wrap items-center gap-3">
-        <FlowBox title="Outlook mailbox" sub="300 to 500 client emails" className="min-w-[160px] flex-1" />
+        <FlowBox title="Outlook mailbox" sub="300–500 client emails" className="min-w-[160px] flex-1" />
         <Arrow />
-        <FlowBox title="Manual scrolling" sub="hours per client" variant="problem" className="min-w-[160px] flex-1" />
+        <FlowBox title="Manual scrolling" sub="Hours per client" variant="problem" className="min-w-[160px] flex-1" />
         <Arrow />
-        <FlowBox title="Memory filter" sub="what felt material" variant="problem" className="min-w-[160px] flex-1" />
+        <FlowBox title="Memory-based selection" sub="Materiality depended on recall" variant="problem" className="min-w-[160px] flex-1" />
         <Arrow />
-        <FlowBox title="Retype into Word" sub="descriptions, follow-ups" variant="problem" className="min-w-[160px] flex-1" />
+        <FlowBox title="Manual Word entry" sub="Descriptions and follow-ups retyped" variant="problem" className="min-w-[160px] flex-1" />
       </div>
       <div className="mt-3">
-        <FlowBox
-          title="Did we miss one?"
-          sub="no way to answer, recall unverifiable"
-          variant="warn"
-          className="py-1"
-        />
+        <FlowBox title="Coverage could not be verified" variant="warn" className="py-1" />
       </div>
     </div>
   )
 }
 
-export function SolutionFlow() {
+export function AutomatedProcessFlow() {
   return (
-    <div className="space-y-6 rounded-2xl border border-neutral-200/80 bg-white p-5">
-      <div>
-        <p className="mb-3 text-sm font-semibold text-foreground">
-          Deterministic retrieval, guaranteed recall
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <FlowBox title="Server-side KQL query" sub="from:domain OR to:domain, quarter" />
-          <Arrow />
-          <FlowBox title="Thread dedup" sub="group by conversationId" />
-        </div>
-        <FixBar text="Fixes: no scrolling, no memory filter, recall is a WHERE clause not a judgment" />
+    <div className="rounded-2xl border border-neutral-200/80 bg-white p-5">
+      <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        After
+      </p>
+      <div className="flex flex-wrap items-center gap-3">
+        <FlowBox title="KQL retrieval" sub="Domain and quarter filtering" variant="flow" className="min-w-[160px] flex-1" />
+        <Arrow />
+        <FlowBox title="Thread grouping" sub="One matter per conversation" variant="flow" className="min-w-[160px] flex-1" />
+        <Arrow />
+        <FlowBox title="AI extraction" sub="Description, follow-up and materiality" variant="ai" className="min-w-[160px] flex-1" />
+        <Arrow />
+        <FlowBox title="Human review" sub="Edit and approve" variant="flow" className="min-w-[160px] flex-1" />
+        <Arrow />
+        <FlowBox title="Word generation" sub="Approved rows only" variant="good" className="min-w-[160px] flex-1" />
       </div>
-
-      <div>
-        <p className="mb-3 text-sm font-semibold text-foreground">
-          AI where judgment is needed, small inputs only
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <FlowBox title="Per-thread extraction" sub="GPT-4.1 mini, one small call each" variant="ai" />
-          <Arrow />
-          <FlowBox title="Rank and slot" sub="materiality 1 to 5, slot 9 rollup" variant="ai" />
-        </div>
-        <FixBar text="Fixes: no giant prompt, no size limits hit, no lost-in-the-middle decay" />
+      <div className="mt-3">
+        <FlowBox title="Coverage is reproducible and auditable" variant="good" className="py-1" />
       </div>
-
-      <div>
-        <p className="mb-3 text-sm font-semibold text-foreground">
-          Staged output, human in the loop
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <FlowBox title="DraftFields list" sub="purge then insert" />
-          <Arrow />
-          <FlowBox title="Consultant review" sub="Power Apps, approve" />
-          <Arrow />
-          <FlowBox title="Word report" sub="repeating table, grows to fit" />
-        </div>
-        <FixBar text="Fixes: no retyping, safe re-runs, AI never writes to the report unreviewed" />
-      </div>
-
-      <FlowBox
-        title="Design principle: classify with the LLM, compute with code"
-        sub="retrieval and filtering deterministic, model does summarization only"
-        variant="warn"
-      />
     </div>
   )
 }

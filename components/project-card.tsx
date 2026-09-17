@@ -37,6 +37,26 @@ export function ProjectCard({ project, variant = "featured" }: ProjectCardProps)
       label: "Designed · Paused",
       className: "bg-slate-100 text-slate-600 border-slate-200",
     },
+    research: {
+      icon: PencilRuler,
+      label: "Research PoC",
+      className: "bg-slate-100 text-slate-600 border-slate-200",
+    },
+    prototype: {
+      icon: PencilRuler,
+      label: "Working prototype",
+      className: "bg-slate-100 text-slate-600 border-slate-200",
+    },
+    role: {
+      icon: CheckCircle2,
+      label: "Core Oracle role",
+      className: "bg-slate-100 text-slate-600 border-slate-200",
+    },
+    internal: {
+      icon: CheckCircle2,
+      label: "Internal deployment",
+      className: "bg-green/10 text-green border-green/20",
+    },
   }
 
   const status = statusConfig[project.status]
